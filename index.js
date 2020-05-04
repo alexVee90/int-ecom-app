@@ -1,12 +1,14 @@
 const express = require('express');
-const Sentry = require('@sentry/node');
-const dotenv = require('dotenv')
+const Sentry  = require('@sentry/node');
+const dotenv  = require('dotenv')
 
-const app = express();
-const PORT = process.env.PORT || 4001;
+const app     = express();
+const PORT    = process.env.PORT || 4001;
 
+//configure express
 app.set('view engine', 'ejs'); // @desc set ejs as default view engine
 dotenv.config(); // @desc load env variables
+Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
 //middleware
 app.use(Sentry.Handlers.requestHandler());
@@ -18,17 +20,14 @@ app.get('/', (req, res) => {
   res.status(200).json(`you reached path ${req.url}`);
 })
 
-// @desc     test-unhandledRejection
+//@desc     test-unhandledRejection
+//@test     navigate to route to throw error and test sentry 
 app.get('/test', async (req, res) => { 
   await nothing;
   res.send('jibber');
 })
 
-const server = app.listen(PORT, () => { 
+//initialize server
+app.listen(PORT, () => { 
   process.stdout.write(`running on port ${PORT} in ${process.env.NODE_ENV} mode \n`);
 });
-
-process.on('unhandledRejection', (reason) => {
-  process.stderr.write(`ERROR ${reason} \n`);
-  server.close(() => process.exitCode = 1);
-})
