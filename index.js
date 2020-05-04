@@ -17,11 +17,12 @@ app.use(Sentry.Handlers.errorHandler());
 // @desc     test-route
 // @access   public
 app.get('/', (req, res) => { 
-  res.status(200).json(`you reached path ${req.url}`);
+  res.status(200).render('home', { route: req.url });
 })
 
-//@desc     test-unhandledRejection
-//@test     navigate to route to throw error and test sentry 
+//@desc         test-unhandledRejection
+//@test         navigate to route to throw error and test sentry 
+//@depracated   will be removed
 app.get('/test', async (req, res) => { 
   await nothing;
   res.send('jibber');
