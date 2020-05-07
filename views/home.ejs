@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/public/stylesheets/navbar.style.css">
-</head>
-<body>
-  <h1>Hello</h1>  
-  <p>You reached route <%= route %></p>
-  <img src="http://localhost:4000/public/images/categories/womens-jewelry.png" alt="">
-  <ul id="topnav">
-    <a href="">hello</a>
-    <a href="">bye</a>
-    <a href="">bye</a>
-    <a href="">bye</a>
-  </ul>
-</body>
-</html>
+<%- include('partials/header') %>
+  <h1 class="main-header">Choose a category</h1>  
+  <div class="showcase">
+    <% categories.forEach(cat => { %>
+
+          <a class="showcase-item" href="/subcategories">
+            <div class="item-text">
+              <p><%= cat.id %></p>
+            </div>
+            <img class="item-img" src="/<%= cat.image %>" alt="no photo">
+          </a>
+
+    <% }) %>
+  </div>
+<%- include('partials/footer') %>

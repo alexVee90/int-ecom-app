@@ -1,0 +1,40 @@
+*, *::before, *::after { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+:root { 
+  --container-width: 80%;
+  --main-color: #8CAE68;
+  --secondary-color: #DBFF76;
+  --tertiary-color: #B6DC76;
+  --light-color: #fff;
+}
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.container { 
+  width: var(--container-width);
+  margin: 0 auto;
+}
+
+.hero { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem;
+}
+
+.main-header { 
+  text-align: center;
+  margin: 1rem;
+  color: var(--main-color);
+}
+
+img { 
+  width: 600px;
+}
