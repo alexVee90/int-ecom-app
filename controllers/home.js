@@ -5,5 +5,5 @@ const asyncWrapper           = require('../util/asyncWrapper');
 // @access   public
 exports.getHomeRoute = asyncWrapper(async (req, res) => { 
     const categories = await getChildCategories('root');
-    res.status(200).render('home', { route: req.url, categories });
+    res.status(200).render('home', { categories });
 })

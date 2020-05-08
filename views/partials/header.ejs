@@ -15,16 +15,16 @@
   <body>
     <header id="main-nav">
       <div class="navbar container">
-        <div id="logo">
+        <a href="/home" id="logo">
           <i class="fas fa-arrow-down"></i> Fashion Down
-        </div>
+        </a>
         <ul>
           <div class="nav-list">
             <li class="nav-list-item">
-              <a class="nav-link" href="#">Men</a>
+              <a class="nav-link <% if(men) { %> <%='active-nav-tag'%> <% } %>" href="/men">Men</a>
             </li>
             <li class="nav-list-item">
-              <a class="nav-link" href="#">Women</a>
+              <a class="nav-link<% if(women) { %> <%='active-nav-tag'%> <% } %>" href="/women">Women</a>
             </li>
           </div>
         </ul>
@@ -32,7 +32,10 @@
     </header>
     <div class="container">
       <div>
+        <a href="/" class="breadcrumb">home</a>
+        <% if(breadcrumbs.length) { %>
           <% breadcrumbs.forEach( bc => { %>
             <span> / </span><a class="breadcrumb" href="/<%= bc.route %>"><%= bc.name %></a>
           <% }) %>
+        <% } %>
       </div>

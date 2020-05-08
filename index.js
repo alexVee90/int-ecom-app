@@ -23,8 +23,26 @@ app.use(express.static(path.join(__dirname, 'public'))); // serve static files f
 app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 
+//redirects
+app.use((req, res, next) => { 
+  let men, women;
+  if(req.originalUrl !== '/favicon.ico') { 
+    const urlArr = req.originalUrl.split('/');
+    // console.log(urlArr);
+    // const m = /^men$/;
+    // const w = /^women$/
+    // const url = req.originalUrl.slice(1)
+
+    men = urlArr.includes('men');
+    women = urlArr.includes('women');
+  }
+  res.locals.men = men;
+  res.locals.women = women;
+  next();
+});
+
 //routes
-app.use('/home', homeRoute);
+app.use('/', homeRoute);
 app.use('/subcategories', productsRoute);
 app.use(errorHandler);
 app.use('*', notFoundHandler);

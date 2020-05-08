@@ -37,13 +37,19 @@ a {
   text-align: center;
   margin: 1rem;
   color: var(--main-color);
+  position: relative;
+}
+
+.main-header::before { 
+  content: '';
+  position: absolute;
+  top: 40px;
+  height: 0.5rem;
+  width: 15rem;
+  background: var(--main-color);
+  border-radius: 10px;
 }
 
 img { 
   width: 600px;
-}
-
-.active-nav-tag { 
-  background-color: var(--tertiary-color);
-  color: var(--light-color);
 }

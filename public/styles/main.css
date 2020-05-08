@@ -2,6 +2,7 @@
 #logo { 
   font-size: 2rem;
   font-weight: 600;
+  color: var(--light-color)
 }
 
 #main-nav {
