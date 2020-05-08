@@ -4,6 +4,5 @@
 */
 
 module.exports = (req, res) => { 
-  console.log(req.originalUrl)
   res.render('not-found');
 }

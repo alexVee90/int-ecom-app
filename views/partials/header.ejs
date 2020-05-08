@@ -7,6 +7,7 @@
     src="https://kit.fontawesome.com/17b916cdd9.js"
     crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="/categories/favicon-16x16.png"> -->
     <link rel="stylesheet" href="/styles/utilities.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <title>Fashion Down</title>
@@ -31,5 +32,7 @@
     </header>
     <div class="container">
       <div>
-        ...breadcrumbs
+          <% breadcrumbs.forEach( bc => { %>
+            <span> / </span><a class="breadcrumb" href="/<%= bc.route %>"><%= bc.name %></a>
+          <% }) %>
       </div>

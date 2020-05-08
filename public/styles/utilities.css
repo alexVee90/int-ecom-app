@@ -16,6 +16,10 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+a { 
+  text-decoration: none;
+}
+
 .container { 
   width: var(--container-width);
   margin: 0 auto;
@@ -37,4 +41,9 @@ body {
 
 img { 
   width: 600px;
+}
+
+.active-nav-tag { 
+  background-color: var(--tertiary-color);
+  color: var(--light-color);
 }

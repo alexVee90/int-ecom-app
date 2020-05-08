@@ -3,9 +3,11 @@ const Sentry  = require('@sentry/node');
 const dotenv  = require('dotenv')
 const path    = require('path');
 
-const homeRoute       = require('./routes/home')
+const homeRoute       = require('./routes/home');
+const productsRoute   = require('./routes/products');
 const notFoundHandler = require('./util/notFoundHandler');
-const errorHandler    = require('./util/errorHandler');
+const errorHandler          = require('./util/errorHandler');
+const breadcrumbHandler    = require('./util/breadcrumbHandler');
 
 const app     = express();
 
@@ -19,9 +21,11 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 app.use(Sentry.Handlers.errorHandler());
+app.use(breadcrumbHandler);
 
 //routes
 app.use('/home', homeRoute);
+app.use('/subcategories', productsRoute);
 app.use(errorHandler);
 app.use('*', notFoundHandler);
 
