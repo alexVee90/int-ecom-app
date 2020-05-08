@@ -3,7 +3,7 @@
   <div class="showcase">
     <% categories.forEach(cat => { %>
 
-          <a class="showcase-item" href="/subcategories">
+          <a class="showcase-item" href="/categories/<%= cat.id %>">
             <div class="item-text">
               <p><%= cat.id %></p>
             </div>

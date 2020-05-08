@@ -1,0 +1,6 @@
+<%- include('../partials/header') %>
+  <% categories.forEach(cat => { %>
+    <span><%= cat.id %></span>
+    <img src="/<%= cat.image %>" alt="no image">
+  <% }) %>
+<%- include('../partials/footer') %>
