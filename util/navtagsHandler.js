@@ -4,8 +4,12 @@
 module.exports = (req, res, next) => { 
   let womens, genderSelected;
   if(req.originalUrl !== '/favicon.ico') { 
-    const urlArr = req.originalUrl.split('/');
-    if(urlArr[1] === '' || urlArr[1] === 'products') genderSelected = true;
+    let temp = req.originalUrl;
+    if(temp.substr(-1) === '/') temp = temp.substr(0, temp.length - 1); //removes the final slash from the url string
+
+    const urlArr = temp.split('/');    // creates an array from the url
+
+    if(urlArr[urlArr.length - 1] === '' || urlArr[urlArr.length - 1] === 'products' || urlArr[urlArr.length - 1] === 'categories') genderSelected = true;
     urlArr.forEach(param => { if(param.includes('womens')) womens = true });
   }
   res.locals.womens = womens;

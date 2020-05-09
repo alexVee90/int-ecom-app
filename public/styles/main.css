@@ -127,6 +127,46 @@
    margin-bottom: 1rem;
  }
 
+ /* PRODUCT-LIST PAGE */
+.products-showcase { 
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  flex-basis: 47%;
+  border: 1px solid black;
+  margin: 0.5rem;
+  list-style-type: none;
+  padding: 1rem;
+}
+
+.product-item h3 { 
+  margin-bottom: 0.5rem;
+}
+
+.item-main-content { 
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.side-content { 
+  padding: 0.5rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-info { 
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* product-details */
+
+
 /* FOOTER */
 #main-footer { 
   margin-top: 1rem;

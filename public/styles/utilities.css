@@ -48,19 +48,9 @@ a {
   margin: 1rem 0;
   font-size: 1.2rem;
 }
-/* 
-.main-header::before { 
-  content: '';
-  position: absolute;
-  top: 40px;
-  height: 0.5rem;
-  width: 15rem;
-  background: var(--main-color);
-  border-radius: 10px;
-} */
 
 img { 
-  width: 600px;
+  max-width: 600px;
   height: 210px;
 }
 
@@ -80,4 +70,25 @@ img {
 .btn:hover { 
   background-color: var(--secondary-color);
   color: black;
+}
+
+.pages { 
+  margin: 1rem;
+  text-align: center;
+}
+
+.page { 
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  color: var(--secondary-color);
+}
+
+.page-active { 
+  color: black;
+  font-size: 1.7rem;
+}
+
+.page:hover { 
+  color: var(--main-color);
 }

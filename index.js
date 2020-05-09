@@ -18,9 +18,6 @@ app.set('view engine', 'ejs'); // @desc set ejs as default view engine
 dotenv.config(); // @desc load env variables
 Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
-//redirects
-// app.get('/categories', (req, res) => res.redirect('/'))
-
 //middleware
 app.use(Sentry.Handlers.requestHandler());
 app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route

@@ -43,3 +43,33 @@ exports.getSingleCategory = async input => {
     throw error
   }
 }
+
+/*
+ @desc GET /products/product_search gets first 25 products from the database
+ @route takes in an optional page param
+ @params type number - OPTIONAL
+ @returns an array of objects
+*/
+exports.getAllProducts = async (page) => { 
+  try {
+    const products = await axios.get(`${process.env.DB_API}/products/product_search?secretKey=${process.env.SECRET_KEY}&page=${page}`)
+    return products.data;
+  } catch (error) {
+    throw error
+  }
+}
+
+
+/*
+ @desc GET /products/product_search?id=<id>&secretKey=<secretKey> gets the products that matches the id from the query
+ @params type string - the id you wish to retrieve from the db
+ @returns an array with one object inside
+*/
+exports.getSingleProduct = async id => { 
+  try {
+    const product = await axios.get(`${process.env.DB_API}/products/product_search?id=${id}&secretKey=${process.env.SECRET_KEY}`)
+    return product.data;
+  } catch (error) {
+    throw error
+  }
+}

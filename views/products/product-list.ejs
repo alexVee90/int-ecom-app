@@ -1,3 +1,31 @@
 <%- include('../partials/header') %>
-<h1>Hello</h1>
+<ul class="products-showcase">
+  <% products.forEach(product => { %>
+    <li class="product-item">
+      <h3><%= product.name %></h3>
+      <div class="item-main-content">
+        <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
+        <div class="side-content">
+          <p><%- product.long_description %></p>
+          <div class="product-info">
+            <p>Price: <%= product.price %> <%= product.currency %></p>
+            <a href="/products/<%= product.id %>" class="btn">More info</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% }) %>
+  </ul>
+  <div class="pages">
+    <% if(hasPreviousPage) { %>
+      <a class="page" href="/products?page=<%= previousPage %>"
+        ><%= previousPage %></a
+      >
+      <% } %>
+      <a class="page page-active" href="/products?page=<%= currentPage %>"
+        ><%= currentPage %></a
+      >
+    <a class="page" href="/products?page=<%= nextPage %>"><%= nextPage %></a>
+
+  </div>
 <%- include('../partials/footer') %>
