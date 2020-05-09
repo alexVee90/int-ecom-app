@@ -21,7 +21,7 @@
         <ul>
           <div class="nav-list">
             <li class="nav-list-item">
-              <a class="nav-link <% if(mens) { %> <%='active-nav-tag'%> <% } %>" href="/categories/mens">Men</a>
+              <a class="nav-link <% if(!womens && !genderSelected) { %> <%='active-nav-tag'%> <% } %>" href="/categories/mens">Men</a>
             </li>
             <li class="nav-list-item">
               <a class="nav-link<% if(womens) { %> <%='active-nav-tag'%> <% } %>" href="/categories/womens">Women</a>
