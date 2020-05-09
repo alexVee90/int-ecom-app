@@ -40,6 +40,15 @@ a {
   position: relative;
 }
 
+.secondary-header { 
+  font-size: 2rem;
+}
+
+.main-paragraph { 
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+
 .main-header::before { 
   content: '';
   position: absolute;
@@ -52,4 +61,23 @@ a {
 
 img { 
   width: 600px;
+  height: 210px;
+}
+
+.btn { 
+  border: none; 
+  padding: 0.5rem 2rem;
+  background-color: var(--tertiary-color);
+  color: var(--light-color);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  margin: 0.5rem;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.btn:hover { 
+  background-color: var(--secondary-color);
+  color: black;
 }

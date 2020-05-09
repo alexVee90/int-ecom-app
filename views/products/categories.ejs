@@ -1,6 +1,18 @@
 <%- include('../partials/header') %>
-  <% categories.forEach(cat => { %>
-    <span><%= cat.id %></span>
-    <img src="/<%= cat.image %>" alt="no image">
-  <% }) %>
+  <% if(mainCategory) { %>
+    <div class="page-description">
+      <h2 class="secondary-header"><%= mainCategory.page_title %></h2>
+      <p class="main-paragraph"><%= mainCategory.page_description %></p>
+    </div>
+  <% } %> 
+  <h3 class="secondary-header category-header">Categories</h3>
+  <ul class="categories-showcase">
+    <% categories.forEach(cat => { %>
+      <li class="category-item">
+        <img src="/<%= cat.image %>" alt="no image">
+        <p><%= cat.page_description %></p>
+        <a href="/products/<%= cat.id %>" class="btn">View Products</a>
+      </li>
+    <% }) %>
+    </ul>
 <%- include('../partials/footer') %>

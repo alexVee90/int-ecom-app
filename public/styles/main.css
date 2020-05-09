@@ -89,6 +89,44 @@
   opacity: 1;
  }
 
+ /* CATEGORIES */
+ .page-description { 
+   margin: 2.5rem 0;
+ }
+
+ .category-header { 
+   margin-bottom: 2rem;
+ }
+
+ .categories-showcase { 
+  display: flex;
+  flex-direction: column;
+ }
+
+ .category-item { 
+   display: flex;
+   flex-direction: column;
+   border-bottom: 2px solid black;
+   margin-bottom: 1rem;
+ }
+
+ .category-item:last-child { 
+  border: none;
+ }
+
+ .category-item img {
+   width: 100%;
+ }
+
+ .category-item p { 
+   margin: 1rem 0;
+ }
+
+ .category-item .btn {
+   width: 15%;
+   margin-bottom: 1rem;
+ }
+
 /* FOOTER */
 #main-footer { 
   margin-top: 1rem;
