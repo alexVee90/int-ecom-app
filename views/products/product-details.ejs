@@ -1,14 +1,12 @@
 <%- include('../partials/header') %>
-<div class="product-item">
-  <div class="item-main-content">
-    <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
-    <div class="side-content">
-      <h3><%= product.name %></h3>
-      <p><%- product.long_description %></p>
-      <div class="product-info">
-        <p>Price: <%= product.price %> <%= product.currency %></p>
-        <a href="#" class="btn">Buy Now</a>
-      </div>
+<div class="product-details-item">
+  <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
+  <div class="product-details-side-content">
+    <h3><%= product.name %></h3>
+    <p><%- product.long_description %></p>
+    <div class="product-details-product-info">
+      <a href="#" class="btn">Buy Now</a>
+      <p>Price: <%= product.price %> <%= product.currency %></p>
     </div>
   </div>
 </div>
