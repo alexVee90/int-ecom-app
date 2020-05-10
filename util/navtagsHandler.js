@@ -14,8 +14,10 @@ module.exports = (req, res, next) => {
     const m = /^mens/;
     const w = /^womens/;
 
-    urlArr.forEach(param => { if(w.test(param)) womens = true });
-    urlArr.forEach(param => { if(m.test(param)) mens = true });
+    urlArr.forEach(param => { 
+      if(w.test(param)) womens = true;
+      if(m.test(param)) mens = true;
+     });
   }
   res.locals.womens = womens;
   res.locals.mens = mens;
