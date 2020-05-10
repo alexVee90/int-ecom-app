@@ -9,7 +9,7 @@
           <p><%- product.long_description %></p>
           <div class="product-info">
             <p>Price: <%= product.price %> <%= product.currency %></p>
-            <a href="/products/<%= product.id %>" class="btn">More info</a>
+            <a href="/products/<%= subcategory %>/<%= product.id %>" class="btn">More info</a>
           </div>
         </div>
       </div>
@@ -18,14 +18,13 @@
   </ul>
   <div class="pages">
     <% if(hasPreviousPage) { %>
-      <a class="page" href="/products?page=<%= previousPage %>"
+      <a class="page" href="/products/<%= subcategory %>?page=<%= previousPage %>"
         ><%= previousPage %></a
       >
       <% } %>
-      <a class="page page-active" href="/products?page=<%= currentPage %>"
+      <a class="page page-active" href="/products/<%= subcategory %>?page=<%= currentPage %>"
         ><%= currentPage %></a
       >
-    <a class="page" href="/products?page=<%= nextPage %>"><%= nextPage %></a>
-
+    <a class="page" href="/products/<%= subcategory %>?page=<%= nextPage %>"><%= nextPage %></a>
   </div>
 <%- include('../partials/footer') %>

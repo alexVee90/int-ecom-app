@@ -11,8 +11,8 @@ module.exports = (req, res, next) => {
 
     const urlArr = temp.split('/');    // creates an array from the url
 
-    const m = /^mens$/;
-    const w = /^womens$/;
+    const m = /^mens/;
+    const w = /^womens/;
 
     urlArr.forEach(param => { if(w.test(param)) womens = true });
     urlArr.forEach(param => { if(m.test(param)) mens = true });

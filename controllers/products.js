@@ -4,6 +4,7 @@ const path                   = require('path');
 const { getAllProducts, getSingleProduct } = require('../models/dbApi');
 
 exports.getProducts = asyncWrapper( async(req, res) => { 
+  const subcategory = req.params.categoryId || 'all';
   const page = req.query.page || 1;
   const products = [...await getAllProducts(page)]
   res.render(
@@ -13,10 +14,10 @@ exports.getProducts = asyncWrapper( async(req, res) => {
       hasPreviousPage: page > 1,
       currentPage: Number(page),
       previousPage: Number(page) - 1,
-      nextPage: Number(page) + 1
+      nextPage: Number(page) + 1,
+      subcategory
     });
 })
-
 
 exports.getProduct = asyncWrapper(async(req, res) => { 
   const productId = req.params.id;
