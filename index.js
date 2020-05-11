@@ -5,7 +5,7 @@ const path    = require('path');
 
 const homeRoute             = require('./routes/home');
 const categoriesRoute       = require('./routes/categories');
-const productsRoute       = require('./routes/products');
+const productsRoute         = require('./routes/products');
 const notFoundHandler       = require('./util/notFoundHandler');
 const errorHandler          = require('./util/errorHandler');
 const breadcrumbHandler     = require('./util/breadcrumbHandler');

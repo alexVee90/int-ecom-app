@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "mocha"
   },
   "author": "Alex Visan",
   "license": "ISC",
@@ -18,6 +19,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
     "nodemon": "^2.0.3"
   }
 }

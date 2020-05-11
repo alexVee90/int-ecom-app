@@ -4,7 +4,7 @@ const {
   getCategories,
 } = require('../controllers/categories');
 
-router.get('/', getCategories);
-router.get('/:id', getCategories);
+router.get('/', getCategories); //will retrieve all the categories
+router.get('/:id', getCategories); // will retrieve only the categories associated with the main category (:id)
 
 module.exports = router;
