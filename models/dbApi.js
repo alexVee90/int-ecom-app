@@ -73,3 +73,19 @@ exports.getSingleProduct = async id => {
     throw error
   }
 }
+
+ /*
+  @desc GET /products/product_search?primary_category_id=womens-clothing-tops&secretKey=<secretKey>​ gets the products that matches the primary_category_id from the query
+  @params type string, number - the primary_category_id you wish to retrieve from the db + the page
+  @returns an array of objects
+*/
+ exports.getProductsFromSubcategory = async (subcategory, page) => { 
+  try {
+    const products = await axios.get(`
+      ${process.env.DB_API}/products/product_search?primary_category_id=${subcategory}&secretKey=${process.env.SECRET_KEY}&page=${page}
+    `)
+    return products.data;
+  } catch (error) {
+    throw error
+  }
+}

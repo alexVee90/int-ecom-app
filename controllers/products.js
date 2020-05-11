@@ -1,12 +1,17 @@
-const asyncWrapper = require('../util/asyncWrapper');
-const getDirname             = require('../util/getDirname');
-const path                   = require('path');
-const { getAllProducts, getSingleProduct } = require('../models/dbApi');
+const asyncWrapper            = require('../util/asyncWrapper');
+const getDirname              = require('../util/getDirname');
+const path                    = require('path');
+const { 
+  getAllProducts, 
+  getSingleProduct, 
+  getProductsFromSubcategory } = require('../models/dbApi');
 
 exports.getProducts = asyncWrapper( async(req, res) => { 
   const subcategory = req.params.categoryId || 'all';
   const page = req.query.page || 1;
-  const products = [...await getAllProducts(page)]
+
+  const products = subcategory === 'all' ? await getAllProducts(page) : await getProductsFromSubcategory(subcategory, page);
+
   res.render(
     path.join(getDirname(), 'views', 'products', 'product-list'), 
     { 
