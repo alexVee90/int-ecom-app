@@ -6,7 +6,7 @@ const {
   getAllCategories, 
   getSingleCategory } = require('../models/dbApi');
 
-exports.getCategories = asyncWrapper( async (req, res) => { 
+exports.getCategories = asyncWrapper(async (req, res) => { 
   const mainCategorySlug = req.params.id;
   let mainCategory = '';
   
@@ -23,7 +23,7 @@ exports.getCategories = asyncWrapper( async (req, res) => {
   const m = /^mens$/;
   const w = /^womens$/;
 
-  if(mainCategorySlug) {
+  if(mainCategorySlug) { 
     if(mainCategorySlug === 'mens') {
       let men = categories.filter(c => {
         if(c.parent_category_id !== 'root') { 

@@ -27,6 +27,7 @@ describe('BreadCrumb Handler', function() {
     it('first index should be an object', () => expect(res.locals.breadcrumbs[0]).to.be.an('object'));
     it('first index should have property name', () => expect(res.locals.breadcrumbs[0]).to.haveOwnProperty('name'));
     it('first index should have property route', () => expect(res.locals.breadcrumbs[0]).to.haveOwnProperty('route'));
+    it('first index should NOT have property test', () => expect(res.locals.breadcrumbs[0]).not.to.haveOwnProperty('test'));
   });
 
 })

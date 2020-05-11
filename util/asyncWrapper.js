@@ -8,5 +8,6 @@ module.exports = (handler) => async (req, res, next) => {
     await handler(req, res);
   } catch (error) {
     next(error);
+    return error;
   }
 }

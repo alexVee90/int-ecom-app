@@ -24,7 +24,7 @@ exports.getProducts = asyncWrapper( async(req, res) => {
     });
 })
 
-exports.getProduct = asyncWrapper(async(req, res) => { 
+exports.getProduct = asyncWrapper(async (req, res) => { 
   const productId = req.params.id;
   const [ product ] = await getSingleProduct(productId);
   res.render(path.join(getDirname(), 'views', 'products', 'product-details'), { product });
