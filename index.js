@@ -1,11 +1,13 @@
-const express = require('express');
-const Sentry  = require('@sentry/node');
-const dotenv  = require('dotenv')
-const path    = require('path');
+const express      = require('express');
+const Sentry       = require('@sentry/node');
+const dotenv       = require('dotenv')
+const path         = require('path');
+const cookieParser = require('cookie-parser');
 
 const homeRoute             = require('./routes/home');
 const categoriesRoute       = require('./routes/categories');
 const productsRoute         = require('./routes/products');
+const authRoute             = require('./routes/auth');
 const notFoundHandler       = require('./util/notFoundHandler');
 const errorHandler          = require('./util/errorHandler');
 const breadcrumbHandler     = require('./util/breadcrumbHandler');
@@ -20,16 +22,19 @@ Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
 //middleware
 app.use(Sentry.Handlers.requestHandler());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 app.use(navtagsHandler);
+app.use(cookieParser())
 
 //routes
 app.use('/', homeRoute);
 app.use('/categories', categoriesRoute);
 app.use('/products', productsRoute);
+app.use('/auth', authRoute);
 app.use(errorHandler);
 app.use('*', notFoundHandler);
 

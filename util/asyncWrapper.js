@@ -1,5 +1,5 @@
 /*
-  @desc wraps async code, permitting us to retype the trycatch block
+  @desc wraps async code, permitting us to avoit retyping the trycatch block
   @return the asynchronous operation of the handler function
 */
 

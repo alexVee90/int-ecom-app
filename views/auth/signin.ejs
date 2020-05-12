@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<form action="/auth/signin" method="POST"  class="main-form">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input minlength="3" type="email" name="email" id="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input minlength="3" type="text" name="password" id="password">
+  </div>
+  <input class="btn submit-btn" type="submit" value="Sign In">
+</form>
+<%- include('../partials/footer') %>

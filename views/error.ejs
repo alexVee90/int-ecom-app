@@ -3,5 +3,8 @@
   <h2>ERROR</h2>
   <h3>STATUS: <%= err.status %></h3>
   <h3><%= err.message %></h3>
+  <% if(err.response.data.error) { %>
+    <h3><%= err.response.data.error %></h3>
+  <% } %>
 </div>
 <%- include('partials/footer') %>

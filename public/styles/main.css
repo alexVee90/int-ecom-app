@@ -210,6 +210,33 @@
   margin: 0;
 }
 
+/* SIGNUP & SIGNIN */
+.main-form {
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group { 
+  margin: 1rem 0;
+}
+
+.form-group input { 
+  display: block;
+  width: 100%;
+  border: none;
+  background: #f4f4f4;
+  padding: 0.5rem;
+}
+
+.submit-btn { 
+  text-align: center;
+}
+
+
+
+
 /* FOOTER */
 #main-footer { 
   margin-top: 1rem;
