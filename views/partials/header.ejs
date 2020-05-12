@@ -15,7 +15,7 @@
   <body>
     <header id="main-nav">
       <div class="navbar container">
-        <a href="/" id="logo">
+        <a href="/" class="alternate-link">
           <i class="fas fa-arrow-down"></i> Fashion Down
         </a>
         <ul>
@@ -26,6 +26,18 @@
             <li class="nav-list-item">
               <a class="nav-link<% if(womens) { %> <%='active-nav-tag'%> <% } %>" href="/categories/womens">Women</a>
             </li>
+            <li class="nav-list-item">
+              <a class="profile-item" href="/auth/user">
+                  <i class="fas fa-user"></i>
+              </a>
+            </li>
+            <% if(isAuthenthicated) { %>
+              <li class="nav-list-item">
+                <a class="profile-item" href="/auth/logout">
+                  <i class="fas fa-sign-out-alt"></i>
+                </a>
+              </li>
+            <% } %>
           </div>
         </ul>
       </div>

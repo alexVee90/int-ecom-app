@@ -1,0 +1,20 @@
+<%- include('../partials/header') %> 
+  <% if(!isAuthenthicated) { %>
+    <div class="hero">
+      <p class="main-paragraph">You are not logged in, please <a href="/auth/signin">sign in</a> or <a href="/auth/signup">sign up</a>.</p> 
+    </div>
+  <% } else { %>
+    <h3 class="main-header">Profile</h3>
+    <ul class="user-card">
+      <li class="card-item">
+        Email: <%= user.email %>
+      </li>
+      <li class="card-item">
+        Name: <%= user.name %>
+      </li>
+      <li class="card-item">
+        Registered at: <%= user.createdAt %>
+      </li>
+    </ul>
+  <% } %>
+<%- include('../partials/footer') %> 

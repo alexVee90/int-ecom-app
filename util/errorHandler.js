@@ -8,7 +8,7 @@ module.exports = (err, req, res, next) => {
     err.status = 500;
     err.msg = 'Internal Server Error';
   }
-  if(err.response.data.error === 'Product Not Found') { 
+  if(err.response.data === 'Product Not Found') { 
     res.render('pnf')
   } else {
     res.render('error', { err });

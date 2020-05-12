@@ -20,6 +20,8 @@ app.set('view engine', 'ejs'); // @desc set ejs as default view engine
 dotenv.config(); // @desc load env variables
 Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
+
+
 //middleware
 app.use(Sentry.Handlers.requestHandler());
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +31,14 @@ app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 app.use(navtagsHandler);
 app.use(cookieParser())
+
+app.use((req, res, next) => { 
+  let isAuthenthicated = false;
+  if(req.cookies.user) isAuthenthicated = true;
+
+  res.locals.isAuthenthicated = isAuthenthicated;
+  next();
+})
 
 //routes
 app.use('/', homeRoute);

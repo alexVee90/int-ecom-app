@@ -1,5 +1,5 @@
 /* MAIN-NAV */
-#logo { 
+.alternate-link { 
   font-size: 2rem;
   font-weight: 600;
   color: var(--light-color)
@@ -36,6 +36,16 @@
   margin-right: 0.5rem;
   background: var(--secondary-color);
   transition: all 0.3s;
+}
+
+.profile-item { 
+  padding-left: 2rem;
+  color: var(--light-color);
+  font-size: 1.5rem;
+}
+
+.profile-item:hover { 
+  color: var(--secondary-color);
 }
 
 .active-nav-tag { 
@@ -234,8 +244,38 @@
   text-align: center;
 }
 
+.secondary-paragraph a { 
+  color: var(--main-color);
+}
 
+.secondary-paragraph a:hover { 
+  color: var(--tertiary-color);
+}
 
+/* USER PAGE */
+.hero .main-paragraph { 
+  font-size: 2rem;
+}
+.main-paragraph a { 
+  color: var(--main-color);
+}
+
+.main-paragraph a:hover { 
+  color: var(--tertiary-color);
+}
+
+.user-card { 
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 40%;
+  list-style-type: none;
+  padding: 1rem;
+  margin: 1rem auto;
+}
+
+.user-card li { 
+  margin: 1rem 0;
+}
 
 /* FOOTER */
 #main-footer { 

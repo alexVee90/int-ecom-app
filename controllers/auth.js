@@ -13,7 +13,7 @@ exports.getSignUp = (req, res, next) => {
 
 exports.postSignUp = asyncWrapper(async (req, res) => { 
   const returnedUser = await signUp(req.body);
-  res.cookie('token', returnedUser.token);
+  res.cookie('user', returnedUser);
   res.redirect('/');
 });
 
@@ -23,11 +23,18 @@ exports.getSignIn = (req, res, next) => {
 
 exports.postSignIn = asyncWrapper(async(req, res) => { 
   const returnedUser = await signIn(req.body);
-  res.cookie('token', returnedUser.token);
+  res.cookie('user', returnedUser);
   res.redirect('/');
 })
 
+exports.getUser = (req, res, next) => { 
+  const { user } = req.cookies.user;
+  const tempDate = new Date(user.createdAt);
+  user.createdAt = tempDate.toDateString()
+  res.render(path.join(getDirname(), 'views', 'auth', 'user'), { user });
+}
+
 exports.logout = (req, res) => { 
-  res.clearCookie('token');
+  res.clearCookie('user');
   res.redirect('/');
 }

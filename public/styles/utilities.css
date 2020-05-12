@@ -49,6 +49,10 @@ a {
   font-size: 1.2rem;
 }
 
+.secondary-paragraph { 
+  text-align: center;
+}
+
 img { 
   max-width: 600px;
   height: 210px;
