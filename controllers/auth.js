@@ -28,10 +28,14 @@ exports.postSignIn = asyncWrapper(async(req, res) => {
 })
 
 exports.getUser = (req, res, next) => { 
-  const { user } = req.cookies.user;
-  const tempDate = new Date(user.createdAt);
-  user.createdAt = tempDate.toDateString()
-  res.render(path.join(getDirname(), 'views', 'auth', 'user'), { user });
+  let user = {}
+  if(req.cookies.user) {
+    let { tempUser } = req.cookies.user
+    user = tempUser;
+    const tempDate = new Date(user.createdAt);
+    user.createdAt = tempDate.toDateString()
+  }
+  res.render(path.join(getDirname(), 'views', 'auth', 'user'), { user: user });
 }
 
 exports.logout = (req, res) => { 

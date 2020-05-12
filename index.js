@@ -4,14 +4,15 @@ const dotenv       = require('dotenv')
 const path         = require('path');
 const cookieParser = require('cookie-parser');
 
-const homeRoute             = require('./routes/home');
-const categoriesRoute       = require('./routes/categories');
-const productsRoute         = require('./routes/products');
-const authRoute             = require('./routes/auth');
-const notFoundHandler       = require('./util/notFoundHandler');
-const errorHandler          = require('./util/errorHandler');
-const breadcrumbHandler     = require('./util/breadcrumbHandler');
-const navtagsHandler        = require('./util/navtagsHandler');
+const homeRoute                      = require('./routes/home');
+const categoriesRoute                = require('./routes/categories');
+const productsRoute                  = require('./routes/products');
+const authRoute                      = require('./routes/auth');
+const notFoundHandler                = require('./util/notFoundHandler');
+const errorHandler                   = require('./util/errorHandler');
+const breadcrumbHandler              = require('./util/breadcrumbHandler');
+const navtagsHandler                 = require('./util/navtagsHandler');
+const isAuthenthicatedHandler        = require('./util/isAuthenthicatedHandler');
 
 const app     = express();
 
@@ -31,14 +32,8 @@ app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 app.use(navtagsHandler);
 app.use(cookieParser())
+app.use(isAuthenthicatedHandler);
 
-app.use((req, res, next) => { 
-  let isAuthenthicated = false;
-  if(req.cookies.user) isAuthenthicated = true;
-
-  res.locals.isAuthenthicated = isAuthenthicated;
-  next();
-})
 
 //routes
 app.use('/', homeRoute);
