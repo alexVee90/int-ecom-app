@@ -1,7 +1,7 @@
 
 module.exports = (req, res, next) => { 
   let isAuthenthicated = false;
-  if(req.cookies.user) isAuthenthicated = true;
+  if(req.cookies.accountInfo) isAuthenthicated = true;
 
   res.locals.isAuthenthicated = isAuthenthicated;
   next();

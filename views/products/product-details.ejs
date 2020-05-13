@@ -5,9 +5,24 @@
     <h3><%= product.name %></h3>
     <p><%- product.long_description %></p>
     <div class="product-details-product-info">
-      <a href="#" class="btn">Buy Now</a>
       <p>Price: <%= product.price %> <%= product.currency %></p>
     </div>
+    <div class="product-actions">
+      <form action="">
+        <input type="hidden" name="quantity" id="quantity" value="1">
+        <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
+        <form-group>
+          <label for="sizes">Pick a size</label>
+          <select id="sizes">
+            <% product.variants.forEach(variant => { %>
+              <option value="<%= variant.product_id %>>"><%= variant.variation_values.size %></option>
+            <% }) %>
+          </select>
+        </form-group>
+        <button class="btn">Add to Wishlist</button>
+      </form>
+    </div>
   </div>
+  
 </div>
 <%- include('../partials/footer') %>

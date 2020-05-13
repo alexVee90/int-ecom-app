@@ -12,8 +12,8 @@ exports.getSignUp = (req, res, next) => {
 }
 
 exports.postSignUp = asyncWrapper(async (req, res) => { 
-  const returnedUser = await signUp(req.body);
-  res.cookie('user', returnedUser);
+  const accountInfo = await signUp(req.body);
+  res.cookie('accountInfo', accountInfo);
   res.redirect('/');
 });
 
@@ -22,23 +22,23 @@ exports.getSignIn = (req, res, next) => {
 }
 
 exports.postSignIn = asyncWrapper(async(req, res) => { 
-  const returnedUser = await signIn(req.body);
-  res.cookie('user', returnedUser);
+  const accountInfo = await signIn(req.body);
+  res.cookie('accountInfo', accountInfo);
   res.redirect('/');
 })
 
 exports.getUser = (req, res, next) => { 
-  let user = {}
-  if(req.cookies.user) {
-    let { tempUser } = req.cookies.user
-    user = tempUser;
+  let userInfo = {}
+  if(req.cookies.accountInfo) {
+    let { user } = req.cookies.accountInfo;
+    userInfo = user;
     const tempDate = new Date(user.createdAt);
-    user.createdAt = tempDate.toDateString()
+    userInfo.createdAt = tempDate.toDateString()
   }
-  res.render(path.join(getDirname(), 'views', 'auth', 'user'), { user: user });
+  res.render(path.join(getDirname(), 'views', 'auth', 'user'), { user: userInfo });
 }
 
 exports.logout = (req, res) => { 
-  res.clearCookie('user');
+  res.clearCookie('accountInfo');
   res.redirect('/');
 }
