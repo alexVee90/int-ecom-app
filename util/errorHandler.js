@@ -11,6 +11,7 @@ module.exports = (err, req, res, next) => {
   // if(err.response.data === 'Product Not Found') { 
   //   res.render('pnf')
   // } else {
+    // console.log(err);
     res.render('error', { err });
   // }
 }

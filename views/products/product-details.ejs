@@ -8,19 +8,24 @@
       <p>Price: <%= product.price %> <%= product.currency %></p>
     </div>
     <div class="product-actions">
-      <form action="">
-        <input type="hidden" name="quantity" id="quantity" value="1">
-        <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
-        <form-group>
-          <label for="sizes">Pick a size</label>
-          <select id="sizes">
-            <% product.variants.forEach(variant => { %>
-              <option value="<%= variant.product_id %>>"><%= variant.variation_values.size %></option>
-            <% }) %>
-          </select>
-        </form-group>
-        <button class="btn">Add to Wishlist</button>
-      </form>
+      <% if(!product.variants.length) { %>
+        <h2>This product has sold out</h2>
+      <% } else { %> 
+        <form action="/auth/wishlist" method="POST">
+          <input type="hidden" name="quantity" id="quantity" value="1">
+          <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
+          <form-group>
+            <label for="sizes">Pick a size</label>
+            <select name="variantId" id="sizes">
+              <% product.variants.forEach(variant => { %>
+                <option value="<%= variant.product_id %>"><%= variant.variation_values.size %></option>
+              <% }) %>
+            </select>
+          </form-group>
+          <button class="btn">Add to Wishlist</button>
+        </form>
+      <% } %> 
+
     </div>
   </div>
   

@@ -1,8 +1,9 @@
-const express      = require('express');
-const Sentry       = require('@sentry/node');
-const dotenv       = require('dotenv')
-const path         = require('path');
-const cookieParser = require('cookie-parser');
+const express        = require('express');
+const Sentry         = require('@sentry/node');
+const dotenv         = require('dotenv')
+const path           = require('path');
+const cookieParser   = require('cookie-parser');
+const methodOverride = require('method-override');
 
 const homeRoute                      = require('./routes/home');
 const categoriesRoute                = require('./routes/categories');
@@ -31,9 +32,9 @@ app.use(express.static(path.join(__dirname, 'public'))); // serve static files f
 app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 app.use(navtagsHandler);
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(isAuthenthicatedHandler);
-
+app.use(methodOverride('_method')); 
 
 //routes
 app.use('/', homeRoute);
