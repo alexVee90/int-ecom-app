@@ -13,6 +13,7 @@ const {
 }                           = require('../controllers/auth');
 const protectedRouteHandler = require('../util/protectedRouteHandler')
 
+router.get('/', (req, res) => res.redirect('/auth/user'));
 
 router.get('/signup', getSignUp);
 router.post('/signup', postSignUp);
