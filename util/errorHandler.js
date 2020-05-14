@@ -8,10 +8,12 @@ module.exports = (err, req, res, next) => {
     err.status = 500;
     err.msg = 'Internal Server Error';
   }
-  // if(err.response.data === 'Product Not Found') { 
-  //   res.render('pnf')
-  // } else {
-    // console.log(err);
-    res.render('error', { err });
-  // }
+  if(err.isAxiosError) { 
+    err.status = err.response.status;
+    err.msg  = err.response.data.error
+  } 
+  console.log('----------------------------------------------------------------------');
+  console.log(err);
+  console.log('----------------------------------------------------------------------');
+  res.render('error', { err });
 }

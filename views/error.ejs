@@ -1,8 +1,12 @@
 <%- include('partials/header') %> 
 <div class="hero">
-  <h2>ERROR</h2>
-  <h3>STATUS: <%= err.status %></h3>
-  <h3><%= err.message %></h3>
-
+  <% if(err.msg === 'Product Not Found') { %>
+    <h3>SOLD OUT!</h3>
+    <p>(in fact there are no / no more products under this subcategory)</p>
+  <% } else { %>
+    <h2>ERROR</h2>
+    <h3>STATUS: <%= err.status %></h3>
+    <h3><%= err.msg %></h3>
+  <% } %>
 </div>
 <%- include('partials/footer') %>
