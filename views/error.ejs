@@ -3,6 +3,9 @@
   <% if(err.msg === 'Product Not Found') { %>
     <h3>SOLD OUT!</h3>
     <p>(in fact there are no / no more products under this subcategory)</p>
+  <% } else if(err.msg === 'There is no wishlist created for this user') { %>
+    <h3>The Wishlist is empty</h3>
+    <p>(error from the db while returning a empty wishlist)</p>
   <% } else { %>
     <h2>ERROR</h2>
     <h3>STATUS: <%= err.status %></h3>

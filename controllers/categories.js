@@ -8,7 +8,7 @@ const {
 
 exports.getCategories = asyncWrapper(async (req, res) => { 
   const mainCategorySlug = req.params.id;
-  const  mainCategory = await getSingleCategory(mainCategorySlug);
+  const mainCategory = await getSingleCategory(mainCategorySlug);
 
   /*
     @desc could have used the below to get only the subcategories that have the parent_category prop set to the mainCategorySlug

@@ -16,5 +16,17 @@
         Registered at: <%= user.createdAt %>
       </li>
     </ul>
+    <div class="user-accesories">
+      <div class="user-wishlst">
+        <a href="/auth/wishlist">
+          <i class="fas fa-list-alt"></i>
+        </a>
+      </div>
+      <div class="user-cart">
+        <a href="/auth/cart">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+    </div>
   <% } %>
 <%- include('../partials/footer') %> 

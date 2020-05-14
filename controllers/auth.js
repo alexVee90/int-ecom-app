@@ -51,13 +51,10 @@ exports.getWishlist = asyncWrapper(async (req, res) => {
 
 exports.postWishlist = asyncWrapper(async (req, res) => { 
 
-  const wishlist = await getWishlistFromDB(req.cookies.accountInfo.token);
-  const itemAlreadyExists = wishlist.items.find(item => item.variant.product_id === req.body.variantId );
-
-  itemAlreadyExists 
-    ? await changeWishlistItemQuantity({ productId: req.body.productId, variantId: req.body.variantId, quantity: itemAlreadyExists.quantity + 1 }, req.cookies.accountInfo.token) 
-    : await addToWishlist(req.body, req.cookies.accountInfo.token)
-
+  await addToWishlist(req.body, req.cookies.accountInfo.token);
+  /*
+    throws an error if the item is already in the wishlist - no way arround it because returning an empty cart also returns an error
+  */
   res.redirect('/auth/wishlist');
 });
 

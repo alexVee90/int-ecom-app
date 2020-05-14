@@ -220,6 +220,16 @@
   margin: 0;
 }
 
+.product-details-form .form-group { 
+  margin: 0;
+}
+
+.product-details-form .form-group input { 
+  display: inline-block;
+  background: var(--light-color);
+  width: 20%;
+}
+
 /* SIGNUP & SIGNIN */
 .main-form {
   width: 40%;
@@ -275,6 +285,24 @@
 
 .user-card li { 
   margin: 1rem 0;
+}
+
+.user-accesories { 
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem auto;
+}
+
+.user-accesories a { 
+  color: var(--main-color);
+  margin: 1rem;
+  font-size: 3rem;
+  transition: color 0.3s;
+}
+
+.user-accesories a:hover { 
+  color: var(--secondary-color);
 }
 
 /* WishList */

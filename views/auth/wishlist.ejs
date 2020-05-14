@@ -3,7 +3,14 @@
   <% wishlist.items.forEach(item => { %> 
     <div class="wishlist-item">
       <ul class="item-info">
-        <li>Product: <%= item.productId %></li> <li class="price">Price: <%= item.variant.price %>$</li> x <li class="quantity">Quantity: <%= item.quantity %></li>
+        <li>
+          <a href="/products/all/<%= item.productId %>">
+            Product: <%= item.productId %>
+          </a> 
+        </li> 
+        <li>Size: <%= item.variant.variation_values.size %></li>
+        <li class="price">Price: <%= item.variant.price %>$</li>
+        <li class="quantity">Quantity: <%= item.quantity %></li>
       </ul>
       <div class="item-action">
         <form action="/auth/wishlist?_method=DELETE" method="POST">
@@ -11,7 +18,7 @@
           <input type="hidden" name="variantId" value="<%= item.variant.product_id %>">
           <button class="btn">Remove From Wishlist</button>
         </form>
-        <form action="" method="POST">
+        <form action="/auth/cart" method="POST">
           <input type="hidden" name="productId" value="<%= item.productId %>">
           <input type="hidden" name="variantId" value="<%= item.variant.product_id %>">
           <button class="btn">Add to Cart</button>
