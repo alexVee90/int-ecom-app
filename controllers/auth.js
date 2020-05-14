@@ -76,8 +76,11 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
 
 exports.getCart = asyncWrapper(async(req, res) => { 
   const { token } = req.cookies.accountInfo;
+
   const cart = await getCartFromDB(token);
-  res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart });
+  const total = cart.items.reduce((acc, i) => acc + (Number(i.variant.price) * Number(i.quantity)), 0);
+
+  res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart, total });
 });
 
 exports.postCart = asyncWrapper(async(req, res) => { 
@@ -93,7 +96,7 @@ exports.postCart = asyncWrapper(async(req, res) => {
 exports.deleteCartItem = asyncWrapper(async(req, res) => {
   const { token } = req.cookies.accountInfo;
   const { productId, variantId } = req.body;
-  
+
   await changeCartItemQuantity({ productId, variantId, quantity: 0}, token);
 
   res.redirect('/auth/cart');

@@ -5,7 +5,10 @@ const {
   addToWishlist,
   getWishlistFromDB,
   deleteWishlistItem,
-  changeWishlistItemQuantity
+  changeWishlistItemQuantity,
+  getCartFromDB,
+  addToCart,
+  changeCartItemQuantity
 } = require('../models/authApi');
 
 describe('Auth Api', function() { 
@@ -82,6 +85,38 @@ describe('Auth Api', function() {
     const data = {}
     it('should return an Error if token is invalid', done => {
       changeWishlistItemQuantity(data, invalidToken).catch(err => {
+        expect(err).to.be.an.instanceOf(Error);
+        done();
+      })
+    });
+  });
+
+  describe('GET Cart Function', function() { 
+    const invalidToken = 'asdasdasdadasd';
+    it('should return an Error if token is invalid', done => {
+      getCartFromDB(invalidToken).catch(err => {
+        expect(err).to.be.an.instanceOf(Error);
+        done();
+      })
+    });
+  });
+
+  describe('Add to Cart Function', function() { 
+    const invalidToken = 'asdasdasdadasd';
+    const data = {}
+    it('should return an Error if token is invalid', done => {
+      addToCart(data, invalidToken).catch(err => {
+        expect(err).to.be.an.instanceOf(Error);
+        done();
+      })
+    });
+  });
+
+  describe('Change Cart item Quantity Function', function() { 
+    const invalidToken = 'asdasdasdadasd';
+    const data = {}
+    it('should return an Error if token is invalid', done => {
+      changeCartItemQuantity(data, invalidToken).catch(err => {
         expect(err).to.be.an.instanceOf(Error);
         done();
       })

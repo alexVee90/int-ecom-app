@@ -11,22 +11,24 @@
       <% if(!product.variants.length) { %>
         <h2>This product has sold out</h2>
       <% } else { %> 
-        <form class="product-details-form" action="/auth/wishlist" method="POST">
-          <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" id="quantity" min="1" value="1">
-          </div>
-          <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
-          <form-group>
-            <label for="sizes">Pick a size</label>
-            <select name="variantId" id="sizes">
-              <% product.variants.forEach(variant => { %>
-                <option value="<%= variant.product_id %>"><%= variant.variation_values.size %></option>
-              <% }) %>
-            </select>
-          </form-group>
-          <button class="btn">Add to Wishlist</button>
-        </form>
+        <div class="product-actions">
+          <form class="product-details-form" action="/auth/wishlist" method="POST">
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" name="quantity" id="quantity" min="1" value="1">
+            </div>
+            <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
+            <form-group>
+              <label for="sizes">Pick a size</label>
+              <select name="variantId" id="sizes">
+                <% product.variants.forEach(variant => { %>
+                  <option value="<%= variant.product_id %>"><%= variant.variation_values.size %></option>
+                <% }) %>
+              </select>
+            </form-group>
+            <button class="btn">Add to Wishlist</button>
+          </form>
+        </div>
       <% } %> 
 
     </div>
