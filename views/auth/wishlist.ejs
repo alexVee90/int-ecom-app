@@ -1,7 +1,7 @@
 <%- include('../partials/header') %> 
   <h2 class="main-header">Wishlist</h2>
   <% wishlist.items.forEach(item => { %> 
-    <div class="wishlist-item">
+    <div class="card-item">
       <ul class="item-info">
         <li>
           <a href="/products/all/<%= item.productId %>">
@@ -21,6 +21,7 @@
         <form action="/auth/cart" method="POST">
           <input type="hidden" name="productId" value="<%= item.productId %>">
           <input type="hidden" name="variantId" value="<%= item.variant.product_id %>">
+          <input type="hidden" name="quantity" value="<%= item.quantity %>">
           <button class="btn">Add to Cart</button>
         </form>
       </div>

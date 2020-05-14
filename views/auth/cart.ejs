@@ -1,0 +1,26 @@
+<%- include('../partials/header') %> 
+<h2 class="main-header">Cart</h2>
+<% cart.items.forEach(item => { %> 
+  <div class="card-item">
+    <ul class="item-info">
+      <li>
+        <a href="/products/all/<%= item.productId %>">
+          Product: <%= item.productId %>
+        </a> 
+      </li> 
+      <li>Size: <%= item.variant.variation_values.size %></li>
+      <li class="price">Price: <%= item.variant.price %>$</li>
+      <li class="quantity">Quantity: <%= item.quantity %></li>
+    </ul>
+    <div class="item-action">
+      <form action="/auth/cart?_method=DELETE" method="POST">
+        <input type="hidden" name="productId" value="<%= item.productId %>">
+        <input type="hidden" name="variantId" value="<%= item.variant.product_id %>">
+        <input type="hidden" name="quantity" value="<%= item.quantity %>">
+        <button class="btn">Remove From Cart</button>
+      </form>
+    </div>
+  </div>
+ 
+<% }) %> 
+<%- include('../partials/footer') %> 

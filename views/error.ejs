@@ -6,6 +6,9 @@
   <% } else if(err.msg === 'There is no wishlist created for this user') { %>
     <h3>The Wishlist is empty</h3>
     <p>(error from the db while returning a empty wishlist)</p>
+  <% } else if(err.msg === 'There is no cart created for this user') { %>
+    <h3>The Cart is empty</h3>
+    <p>(error from the db while returning a empty cart)</p>
   <% } else { %>
     <h2>ERROR</h2>
     <h3>STATUS: <%= err.status %></h3>

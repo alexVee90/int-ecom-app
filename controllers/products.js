@@ -6,7 +6,7 @@ const {
   getSingleProduct, 
   getProductsFromSubcategory } = require('../models/dbApi');
 
-exports.getProducts = asyncWrapper( async(req, res) => { 
+exports.getProducts = asyncWrapper(async(req, res) => { 
   const subcategory = req.params.categoryId || 'all';
   const page = req.query.page || 1;
 

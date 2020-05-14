@@ -9,7 +9,10 @@ const {
   getUser,
   getWishlist,
   postWishlist,
-  deleteWishlist
+  deleteWishlist,
+  getCart,
+  postCart,
+  deleteCartItem
 }                           = require('../controllers/auth');
 const protectedRouteHandler = require('../util/protectedRouteHandler')
 
@@ -26,6 +29,11 @@ router.get('/user', getUser);
 router.get('/wishlist', protectedRouteHandler, getWishlist);
 router.post('/wishlist', protectedRouteHandler, postWishlist);
 router.delete('/wishlist', protectedRouteHandler, deleteWishlist);
+
+router.get('/cart', protectedRouteHandler, getCart);
+router.post('/cart', protectedRouteHandler, postCart);
+router.delete('/cart', protectedRouteHandler, deleteCartItem);
+
 
 router.get('/logout', logout)
 

@@ -305,26 +305,26 @@
   color: var(--secondary-color);
 }
 
-/* WishList */
-.wishlist-item { 
+/* WishList & Cart */
+.card-item { 
   border: 1px solid black;
   margin: 1rem 0;
   border-radius: 10px;
 }
 
-.wishlist-item .item-info { 
+.card-item .item-info { 
   margin: 1rem 0;
   display: flex;
   justify-content: space-around;
   list-style-type: none;
 }
 
-.wishlist-item .item-info li { 
+.card-item .item-info li { 
   flex-basis: 32%;
   text-align: center;
 }
 
-.wishlist-item .item-action { 
+.card-item .item-action { 
   margin: 1rem 0;
   display: flex;
   justify-content: space-around;

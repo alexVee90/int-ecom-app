@@ -7,7 +7,10 @@ const {
   addToWishlist,
   getWishlistFromDB,
   deleteWishlistItem,
-  changeWishlistItemQuantity
+  changeWishlistItemQuantity,
+  getCartFromDB,
+  addToCart,
+  changeCartItemQuantity,
 } = require('../models/authApi');
 
 
@@ -69,7 +72,32 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
 
   
   res.redirect('/auth/wishlist');
-})
+});
+
+exports.getCart = asyncWrapper(async(req, res) => { 
+  const { token } = req.cookies.accountInfo;
+  const cart = await getCartFromDB(token);
+  res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart });
+});
+
+exports.postCart = asyncWrapper(async(req, res) => { 
+  const { token } = req.cookies.accountInfo;
+  const { productId, variantId } = req.body;
+
+  await addToCart(req.body, token);
+  await changeWishlistItemQuantity({productId, variantId, quantity: 0}, token);
+
+  res.redirect('/auth/cart');
+});
+
+exports.deleteCartItem = asyncWrapper(async(req, res) => {
+  const { token } = req.cookies.accountInfo;
+  const { productId, variantId } = req.body;
+  
+  await changeCartItemQuantity({ productId, variantId, quantity: 0}, token);
+
+  res.redirect('/auth/cart');
+});
 
 exports.logout = (req, res) => { 
   res.clearCookie('accountInfo');
