@@ -15,6 +15,7 @@ const {
   createOrder,
 } = require('../models/authApi');
 
+const stripe = require('stripe')('sk_test_fB0H4KPurcm01QOzycK2xLlM00b0CTiQsg');
 
 exports.getSignUp = (req, res, next) => { 
   res.render(path.join(getDirname(), 'views', 'auth', 'signup'));
@@ -81,8 +82,28 @@ exports.getCart = asyncWrapper(async(req, res) => {
 
   const cart = await getCartFromDB(token);
   const total = cart.items.reduce((acc, i) => acc + (Number(i.variant.price) * Number(i.quantity)), 0);
+  const productsForStripe = cart.items.map(item => {
+    return { 
+      name: item.variant.product_id,
+      description: item.variant.orderable,
+      amount: (item.variant.price * 100).toFixed(),
+      currency: 'usd',
+      quantity: item.quantity 
+    }
+  });
 
-  res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart, total });
+  const success_url = `${req.protocol}://${req.get('host')}/auth/success?session_id={CHECKOUT_SESSION_ID}`;
+  const failure_url = `${req.protocol}://${req.get('host')}/failure`;
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: productsForStripe,
+    mode: 'payment',
+    success_url:  `${success_url}`,
+    cancel_url: failure_url,
+  });
+
+  res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart, total, session });
 });
 
 exports.postCart = asyncWrapper(async(req, res) => { 
@@ -107,7 +128,6 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
 //ORDERS 
 exports.getOrders = asyncWrapper(async(req, res) => {
   const { token } = req.cookies.accountInfo;
-
   const orders = await getOrdersFromDB(token);
 
   res.render(path.join(getDirname(), 'views', 'auth', 'orders'), { orders });
@@ -115,13 +135,12 @@ exports.getOrders = asyncWrapper(async(req, res) => {
 
 exports.postOrders = asyncWrapper(async(req, res) => { 
   const { token } = req.cookies.accountInfo;
+  const { session_id } = req.query;
   const dataToBeSent = {};
 
   const { items } = await getCartFromDB(token);
   dataToBeSent.items = items;
-  
-  const paymentId = Math.random();
-  dataToBeSent.paymentId = paymentId;
+  dataToBeSent.paymentId = session_id;
   
   await createOrder(dataToBeSent, token);
   

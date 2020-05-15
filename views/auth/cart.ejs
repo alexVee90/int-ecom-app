@@ -24,9 +24,16 @@
 <% }) %> 
 <div class="cart-actions">
   <p>Total: <%= total %>$</p>
-  <form action="/auth/orders" method="POST">
-    <input type="hidden" name="total" value="<%= total %>">
-    <button class="btn">Place Order</button>
-  </form>
+  <button id="order-btn" class="btn">Place Order</button>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('pk_test_Wj6N6cZRDoCk1lMYtbXFIrED004foy5wqg');
+    const orderBtn = document.getElementById('order-btn');
+    orderBtn.addEventListener('click', function() {
+      stripe.redirectToCheckout({
+        sessionId: '<%= session.id %>'
+      });
+    });
+  </script>
 </div>
 <%- include('../partials/footer') %> 
