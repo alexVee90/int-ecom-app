@@ -16,7 +16,7 @@
         <form action="/auth/wishlist?_method=DELETE" method="POST">
           <input type="hidden" name="productId" value="<%= item.productId %>">
           <input type="hidden" name="variantId" value="<%= item.variant.product_id %>">
-          <button class="btn">Remove From Wishlist</button>
+          <button class="btn btn-danger">Remove From Wishlist</button>
         </form>
         <form action="/auth/cart" method="POST">
           <input type="hidden" name="productId" value="<%= item.productId %>">

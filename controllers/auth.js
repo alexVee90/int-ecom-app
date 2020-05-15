@@ -14,8 +14,8 @@ const {
   getOrdersFromDB,
   createOrder,
 } = require('../models/authApi');
+const stripeMiddleware = require('../util/stripeMiddleware');
 
-const stripe = require('stripe')('sk_test_fB0H4KPurcm01QOzycK2xLlM00b0CTiQsg');
 
 exports.getSignUp = (req, res, next) => { 
   res.render(path.join(getDirname(), 'views', 'auth', 'signup'));
@@ -50,6 +50,7 @@ exports.getUser = (req, res) => {
 
 
 // WISHLIST Controllers 
+
 exports.getWishlist = asyncWrapper(async (req, res) => { 
   const response = await getWishlistFromDB(req.cookies.accountInfo.token);
   res.render(path.join(getDirname(), 'views', 'auth', 'wishlist'), { wishlist: response});
@@ -77,31 +78,16 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
   res.redirect('/auth/wishlist');
 });
 
+
+//CART Controllers 
+
 exports.getCart = asyncWrapper(async(req, res) => { 
   const { token } = req.cookies.accountInfo;
 
   const cart = await getCartFromDB(token);
   const total = cart.items.reduce((acc, i) => acc + (Number(i.variant.price) * Number(i.quantity)), 0);
-  const productsForStripe = cart.items.map(item => {
-    return { 
-      name: item.variant.product_id,
-      description: item.variant.orderable,
-      amount: (item.variant.price * 100).toFixed(),
-      currency: 'usd',
-      quantity: item.quantity 
-    }
-  });
 
-  const success_url = `${req.protocol}://${req.get('host')}/auth/success?session_id={CHECKOUT_SESSION_ID}`;
-  const failure_url = `${req.protocol}://${req.get('host')}/failure`;
-
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: productsForStripe,
-    mode: 'payment',
-    success_url:  `${success_url}`,
-    cancel_url: failure_url,
-  });
+  const session = await stripeMiddleware(req, cart.items);
 
   res.render(path.join(getDirname(), 'views', 'auth', 'cart'), { cart, total, session });
 });
@@ -125,7 +111,9 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
   res.redirect('/auth/cart');
 });
 
-//ORDERS 
+
+//ORDERS Controllers 
+
 exports.getOrders = asyncWrapper(async(req, res) => {
   const { token } = req.cookies.accountInfo;
   const orders = await getOrdersFromDB(token);
@@ -146,6 +134,9 @@ exports.postOrders = asyncWrapper(async(req, res) => {
   
   res.redirect('/auth/orders')
 });
+
+
+//LOGOUT Controller 
 
 exports.logout = (req, res) => { 
   res.clearCookie('accountInfo');

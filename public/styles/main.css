@@ -348,6 +348,14 @@
   justify-content: space-around;
 }
 
+.cart-actions { 
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* ORDERS */
 .order-item { 
   border: 1px solid black;
