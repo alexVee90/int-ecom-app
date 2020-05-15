@@ -24,5 +24,9 @@
 <% }) %> 
 <div class="cart-actions">
   <p>Total: <%= total %>$</p>
+  <form action="/auth/orders" method="POST">
+    <input type="hidden" name="total" value="<%= total %>">
+    <button class="btn">Place Order</button>
+  </form>
 </div>
 <%- include('../partials/footer') %> 

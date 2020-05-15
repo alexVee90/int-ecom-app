@@ -190,3 +190,41 @@ exports.changeCartItemQuantity = async (data, token) => {
     throw error;
   }
 }
+
+/*
+ @desc GET /orders?secretKey=<mysecretKey>  returns the wishlist
+ @params  the auth token
+ @returns an orders array 
+*/
+exports.getOrdersFromDB = async token => { 
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-type": "application/json"
+  }
+  try {
+    const response = await axios.get(`${process.env.DB_API}/orders?secretKey=${process.env.SECRET_KEY}`, { headers });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+/*
+ @desc GET /orders?secretKey=<mysecretKey>  returns the wishlist
+ @params  the auth token
+ @returns an orders object 
+*/
+exports.createOrder = async (data, token) => { 
+  data.secretKey = process.env.SECRET_KEY;
+  data.address = 'address';
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-type": "application/json"
+  }
+  try {
+    const response = await axios.post(`${process.env.DB_API}/orders`, data, { headers });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

@@ -11,6 +11,8 @@ const {
   getCartFromDB,
   addToCart,
   changeCartItemQuantity,
+  getOrdersFromDB,
+  createOrder,
 } = require('../models/authApi');
 
 
@@ -100,6 +102,30 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
   await changeCartItemQuantity({ productId, variantId, quantity: 0}, token);
 
   res.redirect('/auth/cart');
+});
+
+//ORDERS 
+exports.getOrders = asyncWrapper(async(req, res) => {
+  const { token } = req.cookies.accountInfo;
+
+  const orders = await getOrdersFromDB(token);
+
+  res.render(path.join(getDirname(), 'views', 'auth', 'orders'), { orders });
+});
+
+exports.postOrders = asyncWrapper(async(req, res) => { 
+  const { token } = req.cookies.accountInfo;
+  const dataToBeSent = {};
+
+  const { items } = await getCartFromDB(token);
+  dataToBeSent.items = items;
+  
+  const paymentId = Math.random();
+  dataToBeSent.paymentId = paymentId;
+  
+  await createOrder(dataToBeSent, token);
+  
+  res.redirect('/auth/orders')
 });
 
 exports.logout = (req, res) => { 

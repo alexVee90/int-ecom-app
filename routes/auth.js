@@ -12,7 +12,9 @@ const {
   deleteWishlist,
   getCart,
   postCart,
-  deleteCartItem
+  deleteCartItem,
+  getOrders,
+  postOrders
 }                           = require('../controllers/auth');
 const protectedRouteHandler = require('../util/protectedRouteHandler')
 
@@ -33,6 +35,9 @@ router.delete('/wishlist', protectedRouteHandler, deleteWishlist);
 router.get('/cart', protectedRouteHandler, getCart);
 router.post('/cart', protectedRouteHandler, postCart);
 router.delete('/cart', protectedRouteHandler, deleteCartItem);
+
+router.get('/orders', protectedRouteHandler, getOrders);
+router.post('/orders', protectedRouteHandler, postOrders);
 
 
 router.get('/logout', logout)

@@ -1,0 +1,8 @@
+<%- include('../partials/header') %> 
+<h2 class="main-header">Orders</h2>
+<% orders.forEach(order => { %>
+  <div class="order-item">
+    <p>Order ID - <%= order._id %></p>
+  </div>
+<% }) %>
+<%- include('../partials/footer') %> 
