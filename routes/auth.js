@@ -37,7 +37,7 @@ router.post('/cart', protectedRouteHandler, postCart);
 router.delete('/cart', protectedRouteHandler, deleteCartItem);
 
 router.get('/orders', protectedRouteHandler, getOrders);
-router.get('/success', protectedRouteHandler, postOrders);
+router.get('/orders/success', protectedRouteHandler, postOrders);
 
 
 router.get('/logout', logout)

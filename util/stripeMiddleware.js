@@ -16,7 +16,7 @@ module.exports = async (req, items) => {
     }
   });
 
-  const success_url = `${req.protocol}://${req.get('host')}/auth/success?session_id={CHECKOUT_SESSION_ID}`;
+  const success_url = `${req.protocol}://${req.get('host')}/auth/orders/success?session_id={CHECKOUT_SESSION_ID}`;
   const failure_url = `${req.protocol}://${req.get('host')}/failure`;
 
   return await stripe.checkout.sessions.create({

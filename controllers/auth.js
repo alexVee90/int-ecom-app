@@ -1,6 +1,13 @@
-const path = require('path');
-const getDirname = require('../util//getDirname');
-const asyncWrapper = require('../util/asyncWrapper')
+const fs            = require('fs');
+const { promisify } = require('util');
+const path          = require('path');
+const getDirname    = require('../util//getDirname');
+const asyncWrapper  = require('../util/asyncWrapper');
+const readFile      = promisify(fs.readFile);
+
+const stripeMiddleware = require('../util/stripeMiddleware');
+const transporter      = require('../util/nodemailerMiddleware');
+
 const { 
   signUp,
   signIn,
@@ -14,16 +21,28 @@ const {
   getOrdersFromDB,
   createOrder,
 } = require('../models/authApi');
-const stripeMiddleware = require('../util/stripeMiddleware');
 
+
+
+////////////////////////
+//SIGN IN & SIGN UP
 
 exports.getSignUp = (req, res, next) => { 
   res.render(path.join(getDirname(), 'views', 'auth', 'signup'));
 }
 
 exports.postSignUp = asyncWrapper(async (req, res) => { 
+
   const accountInfo = await signUp(req.body);
   res.cookie('accountInfo', accountInfo);
+
+  await transporter.sendMail({
+    from: 'noreply@gmail.com',
+    to: accountInfo.user.email,
+    subject: 'Welcome',
+    html: await readFile(path.join(getDirname(), 'views', 'emails', 'welcome-email.ejs'), 'UTF-8')
+});
+  
   res.redirect('/');
 });
 
@@ -34,6 +53,14 @@ exports.getSignIn = (req, res, next) => {
 exports.postSignIn = asyncWrapper(async(req, res) => { 
   const accountInfo = await signIn(req.body);
   res.cookie('accountInfo', accountInfo);
+
+  await transporter.sendMail({
+    from: 'noreply@gmail.com',
+    to: accountInfo.user.email,
+    subject: 'Welcome Back!',
+    html: await readFile(path.join(getDirname(), 'views', 'emails', 'welcome-back-email.ejs'), 'UTF-8')
+});
+
   res.redirect('/');
 })
 
@@ -49,6 +76,7 @@ exports.getUser = (req, res) => {
 }
 
 
+////////////////////////////////
 // WISHLIST Controllers 
 
 exports.getWishlist = asyncWrapper(async (req, res) => { 
@@ -79,6 +107,7 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
 });
 
 
+/////////////////////////////////
 //CART Controllers 
 
 exports.getCart = asyncWrapper(async(req, res) => { 
@@ -112,6 +141,7 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
 });
 
 
+//////////////////////////////////
 //ORDERS Controllers 
 
 exports.getOrders = asyncWrapper(async(req, res) => {
@@ -136,6 +166,7 @@ exports.postOrders = asyncWrapper(async(req, res) => {
 });
 
 
+/////////////////////////////////////////
 //LOGOUT Controller 
 
 exports.logout = (req, res) => { 
