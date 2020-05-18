@@ -5,15 +5,15 @@ const path           = require('path');
 const cookieParser   = require('cookie-parser');
 const methodOverride = require('method-override');
 
-const homeRoute                      = require('./routes/home');
-const categoriesRoute                = require('./routes/categories');
-const productsRoute                  = require('./routes/products');
-const authRoute                      = require('./routes/auth');
-const notFoundHandler                = require('./util/notFoundHandler');
-const errorHandler                   = require('./util/errorHandler');
-const breadcrumbHandler              = require('./util/breadcrumbHandler');
-const navtagsHandler                 = require('./util/navtagsHandler');
-const isAuthenthicatedHandler        = require('./util/isAuthenthicatedHandler');
+const homeRoute               = require('./routes/home');
+const categoriesRoute         = require('./routes/categories');
+const productsRoute           = require('./routes/products');
+const authRoute               = require('./routes/auth');
+const notFoundHandler         = require('./util/notFoundHandler');
+const errorHandler            = require('./util/errorHandler');
+const breadcrumbHandler       = require('./util/breadcrumbHandler');
+const navtagsHandler          = require('./util/navtagsHandler');
+const isAuthenthicatedHandler = require('./util/isAuthenthicatedHandler');
 
 const app     = express();
 

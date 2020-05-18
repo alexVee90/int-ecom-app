@@ -9,6 +9,7 @@ const readFile      = promisify(fs.readFile);
 const stripeMiddleware = require('../util/stripeMiddleware');
 const transporter      = require('../util/nodemailerMiddleware');
 const createOrderPdf   = require('../util/pdfkitMiddleware');
+const customError      = require('../util/customError');
 
 const { 
   signUp,
@@ -82,7 +83,13 @@ exports.getUser = (req, res) => {
 // WISHLIST Controllers 
 
 exports.getWishlist = asyncWrapper(async (req, res) => { 
-  const response = await getWishlistFromDB(req.cookies.accountInfo.token);
+
+  const { user, token } = req.cookies.accountInfo;
+
+  const response = await getWishlistFromDB(token);
+
+  if(user._id !== response.userId) throw customError(401, 'You are not authorized to view this content');
+
   res.render(path.join(getDirname(), 'views', 'auth', 'wishlist'), { wishlist: response});
 })
 
@@ -97,7 +104,12 @@ exports.postWishlist = asyncWrapper(async (req, res) => {
 
 exports.deleteWishlist = asyncWrapper(async (req, res) => { 
 
-  const wishlist = await getWishlistFromDB(req.cookies.accountInfo.token);
+  const { user, token } = req.cookies.accountInfo;
+
+  const wishlist = await getWishlistFromDB(token);
+
+  if(user._id !== wishlist.userId) throw customError(401, 'You are not authorized to view this content');
+  
   const itemAlreadyExists = wishlist.items.find(item => item.variant.product_id === req.body.variantId );
 
   itemAlreadyExists.quantity > 1 
@@ -119,9 +131,12 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
 //CART Controllers 
 
 exports.getCart = asyncWrapper(async(req, res) => { 
-  const { token } = req.cookies.accountInfo;
+  const { user, token } = req.cookies.accountInfo;
 
   const cart = await getCartFromDB(token);
+
+  if(user._id !== cart.userId) throw customError(401, 'You are not authorized to view this content');
+
   const total = cart.items.reduce((acc, i) => acc + (Number(i.variant.price) * Number(i.quantity)), 0);
 
   const session = await stripeMiddleware(req, cart.items);
@@ -153,8 +168,10 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
 //ORDERS Controllers 
 
 exports.getOrders = asyncWrapper(async(req, res) => {
-  const { token } = req.cookies.accountInfo;
+  const { user, token } = req.cookies.accountInfo;
   const orders = await getOrdersFromDB(token);
+
+  if(user._id !== orders.userId) throw customError(401, 'You are not authorized to view this content');
 
   res.render(path.join(getDirname(), 'views', 'auth', 'orders'), { orders });
 });
@@ -178,6 +195,8 @@ exports.postOrders = asyncWrapper(async(req, res) => {
 });
 
 
+/////////////////////////////////////////
+//INVOICE Controller 
 exports.getInvoice = (req, res) => { 
   const filePath = `order-${req.params.id}.pdf`
   const file = fs.createReadStream(path.join(getDirname(), 'data', filePath));
