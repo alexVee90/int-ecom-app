@@ -1,9 +1,10 @@
-const fs            = require('fs');
-const { promisify } = require('util');
-const path          = require('path');
-const getDirname    = require('../util//getDirname');
-const asyncWrapper  = require('../util/asyncWrapper');
-const readFile      = promisify(fs.readFile);
+const fs                 = require('fs');
+const { promisify }      = require('util');
+const path               = require('path');
+const getDirname         = require('../util//getDirname');
+const asyncWrapper       = require('../util/asyncWrapper');
+const readFile           = promisify(fs.readFile);
+const {validationResult} = require('express-validator');
 
 
 const stripeMiddleware = require('../util/stripeMiddleware');
@@ -35,7 +36,10 @@ exports.getSignUp = (req, res, next) => {
 }
 
 exports.postSignUp = asyncWrapper(async (req, res) => { 
-
+  //express-validator validation
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) throw customError(400, 'Invalid login Credentials');
+  
   const accountInfo = await signUp(req.body);
   res.cookie('accountInfo', accountInfo);
 
@@ -54,6 +58,10 @@ exports.getSignIn = (req, res, next) => {
 }
 
 exports.postSignIn = asyncWrapper(async(req, res) => { 
+  //express-validator validation
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) throw customError(400, 'Invalid login Credentials');
+
   const accountInfo = await signIn(req.body);
   res.cookie('accountInfo', accountInfo);
 

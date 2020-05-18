@@ -1,5 +1,8 @@
 const express               = require('express');
 const router                = express.Router();
+const protectedRouteHandler = require('../util/protectedRouteHandler')
+const { check }             = require('express-validator');
+
 const { 
   logout,
   getSignUp,
@@ -16,16 +19,22 @@ const {
   getOrders,
   postOrders,
   getInvoice
-}                           = require('../controllers/auth');
-const protectedRouteHandler = require('../util/protectedRouteHandler')
+} = require('../controllers/auth');
 
 router.get('/', (req, res) => res.redirect('/auth/user'));
 
 router.get('/signup', getSignUp);
-router.post('/signup', postSignUp);
+router.post('/signup', [
+  check('name').trim().isLength({min: 3}),
+  check('email').trim().isEmail(),
+  check('password').trim().isLength({min: 3})
+], postSignUp);
 
 router.get('/signin', getSignIn)
-router.post('/signin', postSignIn)
+router.post('/signin', [
+  check('email').trim().isEmail(),
+  check('password').trim().isLength({min: 3})
+], postSignIn)
 
 router.get('/user', getUser);
 
