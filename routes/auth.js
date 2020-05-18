@@ -14,7 +14,8 @@ const {
   postCart,
   deleteCartItem,
   getOrders,
-  postOrders
+  postOrders,
+  getInvoice
 }                           = require('../controllers/auth');
 const protectedRouteHandler = require('../util/protectedRouteHandler')
 
@@ -38,6 +39,7 @@ router.delete('/cart', protectedRouteHandler, deleteCartItem);
 
 router.get('/orders', protectedRouteHandler, getOrders);
 router.get('/orders/success', protectedRouteHandler, postOrders);
+router.get('/orders/:id', protectedRouteHandler, getInvoice);
 
 
 router.get('/logout', logout)

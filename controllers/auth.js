@@ -5,8 +5,10 @@ const getDirname    = require('../util//getDirname');
 const asyncWrapper  = require('../util/asyncWrapper');
 const readFile      = promisify(fs.readFile);
 
+
 const stripeMiddleware = require('../util/stripeMiddleware');
 const transporter      = require('../util/nodemailerMiddleware');
+const createOrderPdf   = require('../util/pdfkitMiddleware');
 
 const { 
   signUp,
@@ -65,7 +67,7 @@ exports.postSignIn = asyncWrapper(async(req, res) => {
 })
 
 exports.getUser = (req, res) => { 
-  let userInfo = {}
+  let userInfo = {};
   if(req.cookies.accountInfo) {
     let { user } = req.cookies.accountInfo;
     userInfo = user;
@@ -99,7 +101,13 @@ exports.deleteWishlist = asyncWrapper(async (req, res) => {
   const itemAlreadyExists = wishlist.items.find(item => item.variant.product_id === req.body.variantId );
 
   itemAlreadyExists.quantity > 1 
-    ? await changeWishlistItemQuantity({ productId: req.body.productId, variantId: req.body.variantId, quantity: itemAlreadyExists.quantity - 1 }, req.cookies.accountInfo.token) 
+    ? await changeWishlistItemQuantity(
+      { 
+        productId: req.body.productId, 
+        variantId: req.body.variantId, 
+        quantity: itemAlreadyExists.quantity - 1 
+      }, 
+      req.cookies.accountInfo.token) 
     : await deleteWishlistItem(req.body, req.cookies.accountInfo.token);
 
   
@@ -153,6 +161,7 @@ exports.getOrders = asyncWrapper(async(req, res) => {
 
 exports.postOrders = asyncWrapper(async(req, res) => { 
   const { token } = req.cookies.accountInfo;
+  const { user } = req.cookies.accountInfo;
   const { session_id } = req.query;
   const dataToBeSent = {};
 
@@ -160,10 +169,22 @@ exports.postOrders = asyncWrapper(async(req, res) => {
   dataToBeSent.items = items;
   dataToBeSent.paymentId = session_id;
   
+  //creates the order in the db
   await createOrder(dataToBeSent, token);
-  
+  //creates the pdf in the data file on the server
+  createOrderPdf(session_id, user, items);
+
   res.redirect('/auth/orders')
 });
+
+
+exports.getInvoice = (req, res) => { 
+  const filePath = `order-${req.params.id}.pdf`
+  const file = fs.createReadStream(path.join(getDirname(), 'data', filePath));
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline')
+  file.pipe(res);
+}
 
 
 /////////////////////////////////////////

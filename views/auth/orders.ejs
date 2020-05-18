@@ -2,7 +2,7 @@
 <h2 class="main-header">Orders</h2>
 <% orders.forEach(order => { %>
   <div class="order-item">
-    <p>Order ID - <%= order._id %></p>
+    <p>Order ID - <%= order._id %> / <a href="/auth/orders/<%= order.paymentId %>">Download</a></p>
   </div>
 <% }) %>
 <%- include('../partials/footer') %> 
