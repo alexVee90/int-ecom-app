@@ -12,6 +12,12 @@
   <% } else if(err.msg === 'There are no orders for this user') { %>
     <h3>You haven't placed an order yet</h3>
     <p>(error from the db while returning empty orders)</p>
+  <% } else if(err.msg === 'This item is not in your wishlist') { %> 
+    <h3>Item added to cart</h3>
+    <p>(error while trying to delete from wishlist)</p>
+  <% } else if(err.msg === 'This Item is already in your cart') { %> 
+    <h3>This item is already in your wishlist</h3>
+    <p>(error while trying to add an existing product to the cart)</p>
   <% } else { %>
     <h2>ERROR</h2>
     <h3>STATUS: <%= err.status %></h3>
@@ -19,3 +25,4 @@
   <% } %>
 </div>
 <%- include('partials/footer') %>
+

@@ -4,7 +4,9 @@ const path                    = require('path');
 const { 
   getAllProducts, 
   getSingleProduct, 
-  getProductsFromSubcategory } = require('../models/dbApi');
+  getProductsFromSubcategory,
+  getAllCategories
+ } = require('../models/dbApi');
 
 exports.getProducts = asyncWrapper(async(req, res) => { 
   const subcategory = req.params.categoryId || 'all';
@@ -28,4 +30,26 @@ exports.getProduct = asyncWrapper(async (req, res) => {
   const productId = req.params.id;
   const [ product ] = await getSingleProduct(productId);
   res.render(path.join(getDirname(), 'views', 'products', 'product-details'), { product });
-})
+});
+
+
+
+exports.getSearchProducts = asyncWrapper(async (req, res) => { 
+  const { searchText } = req.query;
+  const regex = new RegExp(searchText);
+  let products = [];
+  
+  const categories = await getAllCategories();
+
+  if(searchText) { 
+    const returnedCat = categories.find(category => {
+      return regex.test(category.page_description.toLowerCase().split(' '));                 
+    });
+
+    if(returnedCat) {
+      products = await getProductsFromSubcategory(returnedCat.id);
+    }
+  }
+
+  res.render(path.join(getDirname(), 'views', 'products', 'products-search'), { products });
+});
