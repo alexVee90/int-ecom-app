@@ -48,6 +48,13 @@
   color: var(--secondary-color);
 }
 
+.header-form input,
+.header-form button {
+  padding: 0.3rem;
+  border: none;
+  border-radius: 5px;
+}
+
 .active-nav-tag { 
   background-color: var(--tertiary-color);
   color: var(--light-color);
@@ -239,6 +246,29 @@
 .product-actions { 
   display: flex;
   flex-direction: column;
+}
+
+/* PRODUCTS-SEARCH */
+.products-search-item { 
+  border: 1px solid black;
+  margin: 1rem auto;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.products-search-item .headers,
+.products-search-item .values { 
+  display: grid;
+  grid-template-columns: 15% 3fr 2fr 15% 15%;
+  margin: 0.5rem auto;
+}
+
+.products-search-item button {
+  margin-left: 0;
+}
+
+.products-search-item .values img { 
+  height: 70px;
 }
 
 /* SIGNUP & SIGNIN */
