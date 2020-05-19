@@ -36,7 +36,7 @@ exports.getProduct = asyncWrapper(async (req, res) => {
 
 exports.getSearchProducts = asyncWrapper(async (req, res) => { 
   const { searchText } = req.query;
-  const regex = new RegExp(searchText);
+  const regex = new RegExp(searchText.toLowerCase());
   let products = [];
   
   const categories = await getAllCategories();

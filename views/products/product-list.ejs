@@ -18,13 +18,13 @@
   </ul>
   <div class="pages">
     <% if(hasPreviousPage) { %>
-      <a class="page" href="/products/<%= subcategory %>/?page=<%= previousPage %>"
+      <a class="page" href="/products/<%= subcategory %>?page=<%= previousPage %>"
         ><%= previousPage %></a
       >
       <% } %>
-      <a class="page page-active" href="/products/<%= subcategory %>/?page=<%= currentPage %>"
+      <a class="page page-active" href="/products/<%= subcategory %>?page=<%= currentPage %>"
         ><%= currentPage %></a
       >
-    <a class="page" href="/products/<%= subcategory %>/?page=<%= nextPage %>"><%= nextPage %></a>
+    <a class="page" href="/products/<%= subcategory %>?page=<%= nextPage %>"><%= nextPage %></a>
   </div>
 <%- include('../partials/footer') %>
