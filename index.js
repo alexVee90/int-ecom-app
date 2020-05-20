@@ -46,6 +46,8 @@ app.use('*', notFoundHandler);
 
 const PORT = process.env.PORT || 4001;
 
+console.log(PORT);
+
 //initialize server
 app.listen(PORT, () => { 
   process.stdout.write(`running on port ${PORT} in ${process.env.NODE_ENV} mode \n`);
