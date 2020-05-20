@@ -4,6 +4,7 @@ const dotenv         = require('dotenv')
 const path           = require('path');
 const cookieParser   = require('cookie-parser');
 const methodOverride = require('method-override');
+const compression    = require('compression');
 
 const homeRoute               = require('./routes/home');
 const categoriesRoute         = require('./routes/categories');
@@ -26,6 +27,7 @@ Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
 //middleware
 app.use(Sentry.Handlers.requestHandler());
+app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
@@ -45,8 +47,6 @@ app.use(errorHandler);
 app.use('*', notFoundHandler);
 
 const PORT = process.env.PORT || 4001;
-
-console.log(PORT);
 
 //initialize server
 app.listen(PORT, () => { 
