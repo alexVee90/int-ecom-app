@@ -155,7 +155,7 @@ exports.getCart = asyncWrapper(async(req, res) => {
 exports.postCart = asyncWrapper(async(req, res) => { 
   const { token } = req.cookies.accountInfo;
   const { productId, variantId } = req.body;
-
+ 
   await addToCart(req.body, token);
   await changeWishlistItemQuantity({productId, variantId, quantity: 0}, token);
 
