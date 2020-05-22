@@ -10,6 +10,7 @@ const homeRoute               = require('./routes/home');
 const categoriesRoute         = require('./routes/categories');
 const productsRoute           = require('./routes/products');
 const authRoute               = require('./routes/auth');
+const adminRoute              = require('./routes/admin');
 const notFoundHandler         = require('./util/notFoundHandler');
 const errorHandler            = require('./util/errorHandler');
 const breadcrumbHandler       = require('./util/breadcrumbHandler');
@@ -43,6 +44,7 @@ app.use('/', homeRoute);
 app.use('/categories', categoriesRoute);
 app.use('/products', productsRoute);
 app.use('/auth', authRoute);
+app.use('/admin', adminRoute);
 app.use(errorHandler);
 app.use('*', notFoundHandler);
 
@@ -50,5 +52,5 @@ const PORT = process.env.PORT || 4001;
 
 //initialize server
 app.listen(PORT, () => { 
-  process.stdout.write(`running on port ${PORT} in ${process.env.NODE_ENV} mode \n`);
+  process.stdout.write(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode \n`);
 });
