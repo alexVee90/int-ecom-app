@@ -30,6 +30,7 @@ Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 app.use(Sentry.Handlers.requestHandler());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 app.use(Sentry.Handlers.errorHandler());

@@ -12,8 +12,22 @@ module.exports = (err, req, res, next) => {
     err.status = err.response.status;
     err.msg  = err.response.data.error
   } 
-  console.log('----------------------------------------------------------------------');
+
+  console.log('--------------------------------------------------------------------------------------');
   console.log(err);
-  console.log('----------------------------------------------------------------------');
+  console.log('--------------------------------------------------------------------------------------');
+
+  //MONGODB ERROR CHECKS
+  if(err.name === 'ValidationError') {
+    err.status = 400;
+    err.msg = ` The following fields are required: ${Object.keys(err.errors)}`;
+    return res.status(err.status).send({ success: false, reason: err.msg, data: null });
+  }
+  if(err.name === 'CastError') {
+    err.status = 400;
+    err.msg = err.message;
+    return res.status(err.status).send({ success: false, reason: err.msg, data: null });
+  }
+
   res.render('error', { err });
 }
