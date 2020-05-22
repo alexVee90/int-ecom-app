@@ -6,6 +6,13 @@ const {
   getAllCategories, 
   getSingleCategory } = require('../models/dbApi');
 
+const { 
+  getMongoCategories, 
+  getMongoCategory
+ } = require('../models/mongoApi');
+
+
+
 exports.getCategories = asyncWrapper(async (req, res) => { 
   const mainCategorySlug = req.params.id;
   const mainCategory = await getSingleCategory(mainCategorySlug);
@@ -43,4 +50,14 @@ exports.getCategories = asyncWrapper(async (req, res) => {
   }
 
   res.render(path.join(getDirname(), 'views', 'products', 'categories'), {mainCategory, categories });
-})
+});
+
+exports.getMongoCategories = asyncWrapper(async (req, res) => {
+  const categoryId = req.params.id;
+
+  const mainCategory = await getMongoCategory(categoryId);
+
+  const categories = await getMongoCategories(categoryId);
+
+  res.render(path.join(getDirname(), 'views', 'products', 'categories'), {mainCategory, categories });
+});

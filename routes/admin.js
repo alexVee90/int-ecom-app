@@ -6,11 +6,12 @@ const {
   postCategory,
   getCategory,
   updateCategory,
-  deleteCategory
+  deleteCategory,
 } = require('../controllers/admin');
 
-//MONGO DB API
 
+
+//MONGO DB API
 //CATEGORY
 
 router.get('/categories', getAllCategories);

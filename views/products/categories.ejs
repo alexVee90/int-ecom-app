@@ -9,7 +9,9 @@
   <ul class="categories-showcase">
     <% categories.forEach(cat => { %>
       <li class="category-item">
-        <img src="/<%= cat.image %>" alt="no image">
+        <div class="img-cont">
+          <img src="/<%= cat.image %>" alt="no image">
+        </div>
         <p><%= cat.page_description %></p>
         <a href="/products/<%= cat.id %>" class="btn">View Products</a>
       </li>

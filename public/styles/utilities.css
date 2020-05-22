@@ -54,8 +54,8 @@ a {
 }
 
 img { 
-  max-width: 600px;
-  height: 210px;
+  display: block;
+  width: 100%;
 }
 
 .btn { 

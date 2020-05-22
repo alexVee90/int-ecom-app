@@ -4,7 +4,9 @@
     <li class="product-item">
       <h3><%= product.name %></h3>
       <div class="item-main-content">
-        <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
+        <div>
+          <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
+        </div>
         <div class="side-content">
           <p><%- product.long_description %></p>
           <div class="product-info">
