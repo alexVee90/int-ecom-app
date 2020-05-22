@@ -50,6 +50,8 @@ exports.getSearchProducts = asyncWrapper(async (req, res) => {
       products = await getProductsFromSubcategory(returnedCat.id);
     }
   }
-
-  res.render(path.join(getDirname(), 'views', 'products', 'products-search'), { products });
+  res.render(
+    path.join(getDirname(), 'views', 'products', 'products-search'), 
+    { products }
+    );
 });

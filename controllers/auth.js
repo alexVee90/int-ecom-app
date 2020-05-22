@@ -176,10 +176,8 @@ exports.deleteCartItem = asyncWrapper(async(req, res) => {
 //ORDERS Controllers 
 
 exports.getOrders = asyncWrapper(async(req, res) => {
-  const { user, token } = req.cookies.accountInfo;
+  const { token } = req.cookies.accountInfo;
   const orders = await getOrdersFromDB(token);
-
-  if(user._id !== orders.userId) throw customError(401, 'You are not authorized to view this content');
 
   res.render(path.join(getDirname(), 'views', 'auth', 'orders'), { orders });
 });

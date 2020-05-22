@@ -13,6 +13,7 @@
 .navbar { 
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: var(--light-color);
   align-items: center;
 }
@@ -408,32 +409,15 @@
     max-width: 600px;
     max-height: 210px;
   }
-  .navbar { 
-    flex-direction: column;
-    /* flex-wrap: wrap; */
-    justify-content: center;
-    align-items: center;
-  }
 
   .alternate-link,
   .header-form {
-    /* flex-basis: 40%; */
     margin: 1rem 0;
-  }
-
-  .nav-list { 
-    margin-bottom: 1rem;
   }
 
   .nav-list-item:nth-child(1), 
   .nav-list-item:nth-child(2) { 
     display: none;
-  }
-
-  .showcase { 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   .category-item .btn {
@@ -443,6 +427,7 @@
   .products-showcase { 
     flex-direction: column;
   }
+
   .product-details-item {
     width: 80%;
   }
@@ -452,20 +437,36 @@
     grid-template-columns: 15% 3fr 2fr 23% 23%;
     margin: 0.5rem auto;
   }
+
   .user-card {
     width: 60%;
   }
+
+  .hero {
+    margin: 3rem 1rem;
+  }
 }
 
-@media (max-width: 420px) {s
+@media screen and (max-width: 770px) {
+
+  .showcase { 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .navbar { 
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
   .nav-list {
     flex-direction: column;
     align-items: center;
     width: 100%;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 
   .nav-list-item { 
@@ -478,17 +479,25 @@
     display: block;
     text-align: center;
   }
+
   .nav-list-item:last-child { 
     border-bottom: none;
   }
+
+}
+
+@media (max-width: 420px) {
+
   .item-main-content { 
     flex-direction: column;
     align-items: center;
   }
+
   .item-main-content img { 
     width: 100px;
     height: 100px;
   }
+
   .product-details-item {
     flex-direction: column;
     padding: 1rem;
@@ -497,9 +506,11 @@
   .products-search-item .headers { 
     display: none;
   }
+
   .products-search-item .values {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
 }

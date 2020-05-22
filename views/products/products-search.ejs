@@ -19,18 +19,26 @@
           <img src="/<%= product.image_groups[0].images[0].link %>" alt="<%= product.image_groups[0].images[0].alt %>">
           <p><%= product.image_groups[0].images[0].title %></p>
           <p><%= product.primary_category_id %></p>
-          <form action="/auth/wishlist" method="POST">
-            <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
-            <input type="hidden" name="variantId" id="variantId" value="<%= product.variants[0].product_id %>">
-            <input type="hidden" name="quantity" id="quantity" value="1">
-            <button class="btn">Add to Wishlist</button>
-          </form>
-          <form action="/auth/cart" method="POST">
-            <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
-            <input type="hidden" name="variantId" id="variantId" value="<%= product.variants[0].product_id %>">
-            <input type="hidden" name="quantity" id="quantity" value="1">
-            <button class="btn">Add to Cart</button>
-          </form>
+          <% if(!product.variants.length) { %>
+            <p>Sold Out</p>
+          <% } else { %>
+            <form action="/auth/wishlist" method="POST">
+              <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
+              <input type="hidden" name="variantId" id="variantId" value="<%= product.variants[0].product_id %>">
+              <input type="hidden" name="quantity" id="quantity" value="1">
+              <button class="btn">Add to Wishlist</button>
+            </form>
+          <% } %>
+          <% if(!product.variants.length) { %>
+            <p>Sold Out</p>
+          <% } else { %>
+            <form action="/auth/cart" method="POST">
+              <input type="hidden" name="productId" id="productId" value="<%= product.id %>">
+              <input type="hidden" name="variantId" id="variantId" value="<%= product.variants[0].product_id %>">
+              <input type="hidden" name="quantity" id="quantity" value="1">
+              <button class="btn">Add to Cart</button>
+            </form>
+          <% } %>
         </div>
       </div>
     <% }) %>

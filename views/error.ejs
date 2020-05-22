@@ -12,7 +12,7 @@
   <% } else if(err.msg === 'There are no orders for this user') { %>
     <h3>You haven't placed an order yet</h3>
     <p>(error from the db while returning empty orders)</p>
-  <% } else if(err.msg === 'This item is not in your wishlist') { %> 
+  <% } else if(err.msg === 'This item is not in your wishlist' || err.msg === 'Wishlist Not Found') { %> 
     <h3>Item added to cart</h3>
     <p>(error while trying to delete from wishlist)</p>
   <% } else if(err.msg === 'This Item is already in your cart') { %> 
