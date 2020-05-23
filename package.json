@@ -28,7 +28,8 @@
     "mongoose": "^5.9.15",
     "nodemailer": "^6.4.6",
     "pdfkit": "^0.11.0",
-    "stripe": "^8.52.0"
+    "stripe": "^8.52.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

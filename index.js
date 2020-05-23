@@ -7,6 +7,7 @@ const methodOverride            = require('method-override');
 const compression               = require('compression');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+
 const homeRoute               = require('./routes/home');
 const categoriesRoute         = require('./routes/categories');
 const productsRoute           = require('./routes/products');
@@ -24,6 +25,7 @@ const app     = express();
 app.set('view engine', 'ejs'); // @desc set ejs as default view engine
 dotenv.config(); // @desc load env variables
 Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
+
 
 
 //middleware
