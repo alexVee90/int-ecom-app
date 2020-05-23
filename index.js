@@ -1,10 +1,10 @@
-const express        = require('express');
-const Sentry         = require('@sentry/node');
-const dotenv         = require('dotenv')
-const path           = require('path');
-const cookieParser   = require('cookie-parser');
-const methodOverride = require('method-override');
-const compression    = require('compression');
+const express                   = require('express');
+const Sentry                    = require('@sentry/node');
+const dotenv                    = require('dotenv')
+const path                      = require('path');
+const cookieParser              = require('cookie-parser');
+const methodOverride            = require('method-override');
+const compression               = require('compression');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const homeRoute               = require('./routes/home');
