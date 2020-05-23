@@ -26,15 +26,14 @@ dotenv.config(); // @desc load env variables
 Sentry.init({ dsn: process.env.SENTRY_DSN }); // initialize sentry
 
 
-
 //middleware
 app.use(Sentry.Handlers.requestHandler());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// serve static files from public route -- 
-// app.use(express.static(path.join(__dirname, 'public', 'images'))); 
+// serve static files from public
+app.use(express.static(path.join(__dirname, 'public', 'assets'))); 
 
 //using a remote server to share the images
 app.use('/images', createProxyMiddleware({ target: 'https://storage.cloud.google.com/int-ecom-app/', changeOrigin: true }));
