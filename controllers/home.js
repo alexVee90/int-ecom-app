@@ -8,7 +8,7 @@ const { Category }           = require('../models');
 // @access   public
 exports.getHomeRoute = asyncWrapper(async (req, res) => { 
     const categories = await getChildCategories('root');
-    const mongoCategories = await Category.find({ parent_category_id: 'root' });
+    // const mongoCategories = await Category.find({ parent_category_id: 'root' });
     
-    res.status(200).render('home', { categories, mongoCategories });
+    res.status(200).render('home', { categories, mongoCategories: [] });
 })
