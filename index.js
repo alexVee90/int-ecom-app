@@ -5,6 +5,7 @@ const path           = require('path');
 const cookieParser   = require('cookie-parser');
 const methodOverride = require('method-override');
 const compression    = require('compression');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const homeRoute               = require('./routes/home');
 const categoriesRoute         = require('./routes/categories');
@@ -31,7 +32,13 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public', 'images'))); // serve static files from public route
+
+// serve static files from public route -- 
+// app.use(express.static(path.join(__dirname, 'public', 'images'))); 
+
+//using a remote server to share the images
+app.use('/images', createProxyMiddleware({ target: 'https://storage.cloud.google.com/int-ecom-app/', changeOrigin: true }));
+
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
