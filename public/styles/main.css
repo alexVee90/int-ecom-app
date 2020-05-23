@@ -213,6 +213,7 @@
 
 .product-details-item img { 
   height: 250px;
+  width: auto;
 }
 
 .product-details-side-content { 
