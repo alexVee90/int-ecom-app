@@ -1,15 +1,12 @@
 const asyncWrapper     = require('../util/asyncWrapper');
 const getDirname       = require('../util/getDirname');
 const path             = require('path');
+const { Category }     = require('../models');
 const { 
   getChildCategories, //could have been used in the commented section - left here just for refference 
   getAllCategories, 
   getSingleCategory } = require('../models/dbApi');
 
-const { 
-  getMongoCategories, 
-  getMongoCategory
- } = require('../models/mongoApi');
 
 
 
@@ -55,9 +52,9 @@ exports.getCategories = asyncWrapper(async (req, res) => {
 exports.getMongoCategories = asyncWrapper(async (req, res) => {
   const categoryId = req.params.id;
 
-  const mainCategory = await getMongoCategory(categoryId);
+  const mainCategory = await Category.findOne({ id: categoryId});
 
-  const categories = await getMongoCategories(categoryId);
+  const categories = await Category.find({ parent_category_id: categoryId });
 
   res.render(path.join(getDirname(), 'views', 'products', 'categories'), {mainCategory, categories });
 });
