@@ -34,13 +34,13 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// serve static files from public
-app.use(express.static(path.join(__dirname, 'public', 'assets'))); 
+
+app.use(express.static(path.join(__dirname, 'public', 'assets'))); // serve static files from public/assets
+app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 
 //using a remote server to share the images
 app.use('/images', createProxyMiddleware({ target: 'https://storage.cloud.google.com/int-ecom-app/', changeOrigin: true }));
 
-app.use(express.static(path.join(__dirname, 'public'))); // serve static files from public route
 app.use(Sentry.Handlers.errorHandler());
 app.use(breadcrumbHandler);
 app.use(navtagsHandler);
